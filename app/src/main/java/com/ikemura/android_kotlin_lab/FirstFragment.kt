@@ -26,6 +26,13 @@ class FirstFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
+
+//        もしくはこれでも遷移できる
+//        val view = inflater.inflate(R.layout.fragment_first, container, false)
+//        view.findViewById<Button>(R.id.fist_navigate_button).setOnClickListener {
+//            Navigation.findNavController(it).navigate(R.id.secondFragment)
+//        }
+//        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
