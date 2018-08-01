@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +21,8 @@ class ItemFragment : Fragment(), OnListFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listener = this
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+        val args = ItemFragmentArgs.fromBundle(arguments)
+        Log.d("ItemFragment", args.id)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,21 +49,6 @@ class ItemFragment : Fragment(), OnListFragmentInteractionListener {
 
     override fun onListFragmentInteraction(item: DummyItem?) {
         Toast.makeText(context, item.toString(), Toast.LENGTH_SHORT).show()
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-                ItemFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
-                }
     }
 }
 

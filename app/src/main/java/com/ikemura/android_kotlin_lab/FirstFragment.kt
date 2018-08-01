@@ -8,26 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_first.fist_navigate_button
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class FirstFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_first, container, false)
 
-//        もしくはこれでも遷移できる
+//        遷移方法1
 //        val view = inflater.inflate(R.layout.fragment_first, container, false)
 //        view.findViewById<Button>(R.id.fist_navigate_button).setOnClickListener {
 //            Navigation.findNavController(it).navigate(R.id.secondFragment)
@@ -37,25 +24,20 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //ボタン押下イベント
+        //遷移方法2
+        val bundle = Bundle().apply { putInt("amount", 2) }
         fist_navigate_button.setOnClickListener(
                 //ナビゲーション開始
-                Navigation.createNavigateOnClickListener(R.id.secondFragment, null)
+                Navigation.createNavigateOnClickListener(R.id.secondFragment, bundle)
         )
-        //もしくはこれでも遷移できる
-//        fist_navigate_button.setOnClickListener{view ->
-//            Navigation.findNavController(view).navigate(R.id.secondFragment)
-//        }
-    }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                FirstFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+//        //遷移方法3
+//        fist_navigate_button.setOnClickListener {
+//            Navigation.findNavController(it).navigate(
+//                    FirstFragmentDirections
+//                            .actionFirstFragmentToSecondFragment()
+//                            .setAmount(1)
+//            )
+//        }
     }
 }
