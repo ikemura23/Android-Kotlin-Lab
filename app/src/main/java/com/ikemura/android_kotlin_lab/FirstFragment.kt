@@ -35,6 +35,10 @@ class FirstFragment : Fragment() {
                 //ナビゲーション開始
                 Navigation.createNavigateOnClickListener(R.id.secondFragment, null)
         )
+        //もしくはこれでも遷移できる
+//        fist_navigate_button.setOnClickListener{view ->
+//            Navigation.findNavController(view).navigate(R.id.secondFragment)
+//        }
     }
 
     companion object {
