@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity"
     >
 
+    <include layout="@layout/sea_wave" />
+
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView"
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/blue_waves"
+        app:lottie_rawRes="@raw/giftbox"
         />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_gravity="center"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/octopus"
+        app:lottie_rawRes="@raw/location_pin"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/star_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/star"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/favourite_app_icon"
+            />
+    </FrameLayout>
+</LinearLayout>
