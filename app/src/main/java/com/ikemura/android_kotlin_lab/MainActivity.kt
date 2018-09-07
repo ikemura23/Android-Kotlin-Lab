@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             val transition = main_container.background as TransitionDrawable
-            transition.isCrossFadeEnabled = true
             transition.startTransition(1000)
 
             supportFragmentManager
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val transition = main_container.background as TransitionDrawable
-        transition.isCrossFadeEnabled = true
         transition.reverseTransition(1000)
 
         supportFragmentManager
