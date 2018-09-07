@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.main_container, SecondFragment())
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit()
         }
     }
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_container, FirstFragment())
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit()
     }
 }
