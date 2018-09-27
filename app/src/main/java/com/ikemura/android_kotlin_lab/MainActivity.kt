@@ -1,8 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
-import android.bluetooth.le.AdvertiseSettings
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
