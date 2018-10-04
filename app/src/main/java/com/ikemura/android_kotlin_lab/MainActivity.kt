@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
@@ -24,7 +25,14 @@ class MainActivity : AppCompatActivity() {
 
     // WorkManagerを実行
     private fun startWorkManager() {
+        //worker requestを作成
         val testWorker = OneTimeWorkRequestBuilder<TestWorker>().build()
+        //タスクを監視
+        WorkManager.getInstance().getStatusById(testWorker.id).observe(this, Observer {
+            if (it == null) return@Observer
+            Log.d("MainActivity:StatusById", it.toString())
+        })
+        //タスクをエンキュー
         WorkManager.getInstance().enqueue(testWorker)
     }
 }
