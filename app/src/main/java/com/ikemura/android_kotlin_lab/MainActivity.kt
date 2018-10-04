@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         })
         //タスクをエンキュー
         WorkManager.getInstance().enqueue(testWorker)
+        WorkManager.getInstance().cancelWorkById(testWorker.id)
     }
 }
 
