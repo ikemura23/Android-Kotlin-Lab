@@ -16,19 +16,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //ボタンを押したら
         button1.setOnClickListener {
             startWorkManager()
         }
     }
 
+    // WorkManagerを実行
     private fun startWorkManager() {
         val testWorker = OneTimeWorkRequestBuilder<TestWorker>().build()
         WorkManager.getInstance().enqueue(testWorker)
     }
 }
 
+// WorkManagerクラス
 class TestWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
     override fun doWork(): Result {
+        // ここに処理内容を書く
         Log.d("MainActivity", "WorkManager Test")
         return Result.SUCCESS
     }
