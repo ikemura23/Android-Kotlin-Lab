@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
@@ -25,8 +26,15 @@ class MainActivity : AppCompatActivity() {
 
     // WorkManagerを実行
     private fun startWorkManager() {
+        //制約を作成
+        val constraints = Constraints.Builder()
+                .setRequiresCharging(true)      //充電中である
+                .setRequiresBatteryNotLow(true) //バッテリーが少なくない
+                .build()
         //worker requestを作成
-        val testWorker = OneTimeWorkRequestBuilder<TestWorker>().build()
+        val testWorker = OneTimeWorkRequestBuilder<TestWorker>()
+                .setConstraints(constraints)    //制約を追加
+                .build()
         //タスクを監視
         WorkManager.getInstance().getStatusById(testWorker.id).observe(this, Observer {
             if (it == null) return@Observer
