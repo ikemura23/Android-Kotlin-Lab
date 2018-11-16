@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.assertj.core.api.Assertions.tuple
 import org.assertj.core.api.Assertions.within
 import org.assertj.core.api.SoftAssertions
@@ -115,5 +116,17 @@ class InputCheckerTest {
                         tuple("Dodgers", "Dodger Stadium"), //tupleでこのプロパティだけをもった一時的な型として扱って比較する
                         tuple("Angels", "Angel Stadium")
                 )
+    }
+
+    @Test
+    fun assetJ_exception() {
+        assertThatExceptionOfType(RuntimeException::class.java) //キャッチしたい例外のタイプ
+                .isThrownBy { functionsMyThrow() }  //例外をだす可能性のあるメソッドを指定
+                .withMessage("Aborted!")    //詳細メッセージの検証
+                .withNoCause()  //この例外がほかの例外経由で送出されていないことを検証
+    }
+
+    private fun functionsMyThrow() {
+        throw java.lang.RuntimeException("Aborted!")
     }
 }
