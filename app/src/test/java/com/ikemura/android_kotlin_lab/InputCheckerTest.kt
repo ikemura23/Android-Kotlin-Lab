@@ -22,4 +22,11 @@ class InputCheckerTest {
         val actual = target.isValid("foo")  //fooという文字列を渡して、実測値をactualに格納
         assertThat(actual, `is`(true))  //assertThat()で実測値と期待値が一致することを検証
     }
+
+    @Test
+    fun isValid_givenAlphaNumeric_returnTrue() {
+        var target = InputChecker()
+        val actual = target.isValid("abc123")
+        assertThat(actual, `is`(true))
+    }
 }
