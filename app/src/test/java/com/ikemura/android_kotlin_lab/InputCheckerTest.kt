@@ -1,8 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
-import org.hamcrest.CoreMatchers.`is`
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -26,13 +25,13 @@ class InputCheckerTest {
     fun isValid() {
         val target = InputChecker()
         val actual = target.isValid("foo")  //fooという文字列を渡して、実測値をactualに格納
-        assertThat(actual, `is`(true))  //assertThat()で実測値と期待値が一致することを検証
+        assertThat(actual).isTrue()
     }
 
     @Test
     fun isValid_givenAlphaNumeric_returnTrue() {
         val actual = target.isValid("abc123")
-        assertThat(actual, `is`(true))
+        assertThat(actual).isTrue()
     }
 
     /**
