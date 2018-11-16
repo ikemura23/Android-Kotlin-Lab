@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.within
 import org.assertj.core.api.SoftAssertions
 import org.junit.After
 import org.junit.Before
@@ -64,5 +65,16 @@ class InputCheckerTest {
                     .matches("[A-Z]{5}")
                     .isInstanceOf(String::class.java)
         }.assertAll()
+    }
+
+    @Test
+    fun assertJ_numeric() {
+        assertThat(3.14159)
+                .isNotZero()    //ゼロではなく
+                .isNotNegative()    //負数ではなく
+                .isGreaterThan(3.0) //３より大きく
+                .isLessThanOrEqualTo(4.0)   //4以下
+                .isBetween(3.0, 3.2)    //3.0から3.2の範囲内
+                .isCloseTo(Math.PI, within(0.001))  //Math.PIで定義された円周率の定数から誤差0.001以内である
     }
 }
