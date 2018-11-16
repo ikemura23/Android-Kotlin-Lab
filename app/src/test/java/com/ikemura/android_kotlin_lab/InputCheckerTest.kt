@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.tuple
 import org.assertj.core.api.Assertions.within
 import org.assertj.core.api.SoftAssertions
 import org.junit.After
@@ -79,13 +80,40 @@ class InputCheckerTest {
     }
 
     @Test
-    fun assertJ_list() {
+    fun assertJ_collection() {
         val target = listOf("Giants", "Dodgers", "Athletics")
         assertThat(target)
                 .hasSize(3) //要素の個数を検証
                 .contains("Dodgers") //要素がリストに含まれるかどうか
-                .containsOnly("Athletics", "Dodgers", "Giants") //順不同で透過な要素のみが含まれているか
-                .containsExactly("Giants", "Dodgers", "Athletics") //透過な要素のみが同じ順序で同じ組み合わせで重複なしに含まれるか
+                .containsOnly("Athletics", "Dodgers", "Giants") //順不同で等価な要素のみが含まれているか
+                .containsExactly("Giants", "Dodgers", "Athletics") //等価な要素のみが同じ順序で同じ組み合わせで重複なしに含まれるか
                 .doesNotContain("Padres") //含んでいないか
+    }
+
+    @Test
+    fun assetJ_collection_filtering() {
+        data class BallTeam(val name: String, val city: String, val stadium: String)
+
+        val target = listOf(
+                BallTeam("Giants", "San Francisco", "AT&T Park"),
+                BallTeam("Dodgers", "Los Angels", "Dodger Stadium"),
+                BallTeam("Angels", "Los Angels", "Angel Stadium"),
+                BallTeam("Athletics", "Oakland", "Oakland Coliseum"),
+                BallTeam("Padres", "San Diego", "Petco Park")
+        )
+
+        assertThat(target)
+                .filteredOn { team -> team.city.startsWith("San") } //Sanで始まり
+                .filteredOn { team -> team.city.endsWith(("Francisco")) } //Franciscoで終わるものをフィルタリング
+                .extracting("name", String::class.java) //name:Stringプロパティだけを取り出す
+                .containsExactly("Giants")  //extractingで取り出されたname要素はGiantsである
+
+        assertThat(target)
+                .filteredOn { team -> team.city == "Los Angels" } //cityがLos Angelsのものをフィルタリング
+                .extracting("name", "stadium") //nameとstadiumだけ取り出す
+                .containsExactly(
+                        tuple("Dodgers", "Dodger Stadium"), //tupleでこのプロパティだけをもった一時的な型として扱って比較する
+                        tuple("Angels", "Angel Stadium")
+                )
     }
 }
