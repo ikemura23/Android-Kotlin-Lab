@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.SoftAssertions
 import org.junit.After
 import org.junit.Before
 import org.junit.Ignore
@@ -46,5 +47,22 @@ class InputCheckerTest {
     @Test
     fun temporarilySkipThisTest() {
         //略
+    }
+
+    @Test
+    fun assertJ_test() {
+        SoftAssertions().apply {
+            assertThat("TOKYO")
+                    .`as`("TEXT CHECK TOKYO")   //わかりやすいラベルをつけている、テストが失敗したときこのラベルが表示される
+                    .isEqualTo("TOKYO")
+                    .isEqualToIgnoringCase("tokyo") //大文字小文字を無視した場合に同一文字列かどうかを検証
+                    .isNotEqualTo("KYOTO")
+                    .isNotBlank()
+                    .startsWith("TO")
+                    .endsWith("YO")
+                    .contains("OKY")
+                    .matches("[A-Z]{5}")
+                    .isInstanceOf(String::class.java)
+        }.assertAll()
     }
 }
