@@ -77,4 +77,15 @@ class InputCheckerTest {
                 .isBetween(3.0, 3.2)    //3.0から3.2の範囲内
                 .isCloseTo(Math.PI, within(0.001))  //Math.PIで定義された円周率の定数から誤差0.001以内である
     }
+
+    @Test
+    fun assertJ_list() {
+        val target = listOf("Giants", "Dodgers", "Athletics")
+        assertThat(target)
+                .hasSize(3) //要素の個数を検証
+                .contains("Dodgers") //要素がリストに含まれるかどうか
+                .containsOnly("Athletics", "Dodgers", "Giants") //順不同で透過な要素のみが含まれているか
+                .containsExactly("Giants", "Dodgers", "Athletics") //透過な要素のみが同じ順序で同じ組み合わせで重複なしに含まれるか
+                .doesNotContain("Padres") //含んでいないか
+    }
 }
