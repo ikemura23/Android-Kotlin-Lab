@@ -30,4 +30,12 @@ class InputCheckerTest {
         val actual = target.isValid("abc123")
         assertThat(actual, `is`(true))
     }
+
+    /**
+     * 例外を検証
+     */
+    @Test(expected = IllegalArgumentException::class)
+    fun isValid_givenNull_throwsIllegalArgumentException() {
+        target.isValid(null)
+    }
 }
