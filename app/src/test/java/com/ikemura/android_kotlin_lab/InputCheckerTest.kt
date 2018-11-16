@@ -4,6 +4,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
 class InputCheckerTest {
@@ -37,5 +38,11 @@ class InputCheckerTest {
     @Test(expected = IllegalArgumentException::class)
     fun isValid_givenNull_throwsIllegalArgumentException() {
         target.isValid(null)
+    }
+
+    @Ignore("仮実装なので一時的にスキップ")
+    @Test
+    fun temporarilySkipThisTest() {
+        //略
     }
 }
