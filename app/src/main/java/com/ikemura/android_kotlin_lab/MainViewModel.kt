@@ -20,10 +20,14 @@ class MainViewModel : ViewModel() {
     fun load() {
         state.value = ScreenState.Loading // ローディング表示
         job = GlobalScope.launch(Dispatchers.Main) {
-            delay(2000L) // ２秒待つ
-            // API通信処理
-            val response = SomeData(1) // APIレスポンスを仮作成
-            state.value = ScreenState.Data(response) // APIレスポンスを表示
+            try {
+                delay(2000L) // ２秒待つ
+                // API通信処理
+                val response = SomeData(1) // APIレスポンスを仮作成
+                state.value = ScreenState.Data(response) // APIレスポンスを表示
+            } catch (e: Exception) {
+                state.value = ScreenState.Error // エラー
+            }
         }
     }
 }
