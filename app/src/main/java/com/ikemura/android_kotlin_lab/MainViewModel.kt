@@ -14,9 +14,7 @@ class MainViewModel : ViewModel() {
     // コルーチンのジョブ
     var job = Job()
 
-    /**
-     * データ読み込み
-     */
+    // データ読み込み
     fun load() {
         state.value = ScreenState.Loading // ローディング表示
         job = GlobalScope.launch(Dispatchers.Main) {
