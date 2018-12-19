@@ -1,4 +1,4 @@
-package com.ikemura.android_kotlin_lab
+package com.ikemura.android_kotlin_lab.main
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.ikemura.android_kotlin_lab.R
 import kotlinx.android.synthetic.main.main_fragment.text
 
 class MainFragment : Fragment() {

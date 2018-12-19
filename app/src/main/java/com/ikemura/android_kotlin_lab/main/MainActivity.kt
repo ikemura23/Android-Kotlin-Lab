@@ -1,7 +1,9 @@
-package com.ikemura.android_kotlin_lab
+package com.ikemura.android_kotlin_lab.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.ikemura.android_kotlin_lab.R
+import com.ikemura.android_kotlin_lab.list.ItemFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, ItemFragment.newInstance(50).apply {  })
                 .commitNow()
     }
 }

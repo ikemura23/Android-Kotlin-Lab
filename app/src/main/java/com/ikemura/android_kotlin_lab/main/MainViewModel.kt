@@ -1,4 +1,4 @@
-package com.ikemura.android_kotlin_lab
+package com.ikemura.android_kotlin_lab.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
