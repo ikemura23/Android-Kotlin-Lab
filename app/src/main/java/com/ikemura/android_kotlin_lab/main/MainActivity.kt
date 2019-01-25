@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.list.ItemFragment
+import com.ikemura.android_kotlin_lab.rss.RssFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, ItemFragment.newInstance(50))
+                .replace(R.id.container, RssFragment.newInstance())
                 .commitNow()
     }
 }
