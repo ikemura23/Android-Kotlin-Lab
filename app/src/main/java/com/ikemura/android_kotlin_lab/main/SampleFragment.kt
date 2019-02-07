@@ -1,5 +1,6 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Context
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.text.style.AbsoluteSizeSpan
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.core.text.set
 import androidx.core.text.toSpannable
@@ -27,6 +29,14 @@ class SampleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setSpannable()
         createBundle()
+        sharedPreference()
+    }
+
+    private fun sharedPreference() {
+        val preferences = context?.getSharedPreferences("data", Context.MODE_PRIVATE)
+        preferences?.edit {
+            putBoolean("boolean", true)
+        }
     }
 
     private fun createBundle() {
