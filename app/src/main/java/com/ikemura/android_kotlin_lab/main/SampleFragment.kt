@@ -15,6 +15,8 @@ import androidx.core.os.bundleOf
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.ikemura.android_kotlin_lab.R
 import kotlinx.android.synthetic.main.fragment_sample.main_text
 
@@ -30,6 +32,30 @@ class SampleFragment : Fragment() {
         setSpannable()
         createBundle()
         sharedPreference()
+        viewModelKtx()
+    }
+
+    private fun viewModelKtx() {
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.state.observe(this, Observer<ScreenState> { state ->
+            when (state) {
+                is ScreenState.Loading -> {
+                    //ローディング処理
+                    Log.d("SampleFragment", "Loading")
+                }
+                is ScreenState.Data -> {
+                    //データ取得
+                    Log.d("SampleFragment", "Data $state.someData")
+                }
+                is ScreenState.Error -> {
+                    //エラー処理
+                    Log.d("SampleFragment", "Error")
+                }
+            }
+        })
+
+        // 呼び出し開始
+        viewModel.loadKtx()
     }
 
     private fun sharedPreference() {

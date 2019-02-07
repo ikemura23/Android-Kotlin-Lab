@@ -2,6 +2,7 @@ package com.ikemura.android_kotlin_lab.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -18,6 +19,20 @@ class MainViewModel : ViewModel() {
     fun load() {
         state.value = ScreenState.Loading // ローディング表示
         job = GlobalScope.launch(Dispatchers.Main) {
+            try {
+                delay(2000L) // ２秒待つ
+                // API通信処理
+                val response = SomeData(1) // APIレスポンスを仮作成
+                state.value = ScreenState.Data(response) // APIレスポンスを表示
+            } catch (e: Exception) {
+                state.value = ScreenState.Error // エラー
+            }
+        }
+    }
+
+    fun loadKtx() {
+        state.value = ScreenState.Loading // ローディング表示
+        viewModelScope.launch(Dispatchers.Main) {
             try {
                 delay(2000L) // ２秒待つ
                 // API通信処理
