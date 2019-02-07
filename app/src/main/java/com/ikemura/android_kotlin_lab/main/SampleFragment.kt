@@ -2,7 +2,6 @@ package com.ikemura.android_kotlin_lab.main
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.text.method.MovementMethod
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ClickableSpan
 import android.util.Log
@@ -10,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.fragment.app.Fragment
@@ -26,6 +26,20 @@ class SampleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setSpannable()
+        createBundle()
+    }
+
+    private fun createBundle() {
+        val bundle = Bundle().apply {
+            putInt("1", 1)
+        }
+        Log.d("SampleFragment", bundle.toString())
+
+        val bundle2 = bundleOf(
+            Pair("1", 1),
+            Pair("2", "222")
+        )
+        Log.d("SampleFragment", bundle2.toString())
     }
 
     private fun setSpannable() {
@@ -37,7 +51,7 @@ class SampleFragment : Fragment() {
         // 3〜5文字をリンク
         sp1[3..5] = object : ClickableSpan() {
             override fun onClick(widget: View) {
-                Log.d("tag","click")
+                Log.d("tag", "click")
                 Toast.makeText(context, "Click!", Toast.LENGTH_SHORT).show()
             }
         }
