@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         Log.e(TAG, "例外キャッチ $throwable")
     }
     private val job = SupervisorJob()
-    private val scope = CoroutineScope(Dispatchers.Default + job)
+    private val scope = CoroutineScope(Dispatchers.Default + job + exceptionHandler)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     fun doWork(): Deferred<String> = throw TimeoutException()
 
     fun loadData() {
-        scope.launch(exceptionHandler) {
+        scope.launch {
             doWork()
             Log.d(TAG, "到達しない")
         }
