@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    private val job = SupervisorJob() // <-変更
+    private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.Default + job)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +31,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // タイムアウトエラーの可能性がある処理
-    fun doWork(): Deferred<String> = scope.async { throw TimeoutException() }
+    // エラーの可能性がある処理
+    fun doWork(): Deferred<String> = throw TimeoutException()
 
     fun loadData() = scope.launch {
         try {
-            doWork().await()
+            async {
+                doWork()
+            }
         } catch (e: Exception) {
-            Log.d(TAG, "キャッチされる")
+            Log.d(TAG, "キャッチされない")
         }
     }
 
