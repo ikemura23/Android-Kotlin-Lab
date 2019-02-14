@@ -8,7 +8,7 @@ import com.ikemura.android_kotlin_lab.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeoutException
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    private val job = Job()
+    private val job = SupervisorJob() // <-変更
     private val scope = CoroutineScope(Dispatchers.Default + job)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         try {
             doWork().await()
         } catch (e: Exception) {
-            Log.d(TAG, "ここに到達しない")
+            Log.d(TAG, "キャッチされる")
         }
     }
 
