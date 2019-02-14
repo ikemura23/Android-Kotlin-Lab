@@ -10,6 +10,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeoutException
 
@@ -32,15 +33,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // エラーの可能性がある処理
-    fun doWork(): Deferred<String> = throw TimeoutException()
+    suspend fun doWork(): Deferred<String> = coroutineScope {
+        async { throw TimeoutException() }
+    }
 
-    fun loadData() = scope.launch {
-        try {
-            async {
+    fun loadData() {
+        scope.launch {
+            try {
                 doWork()
+                Log.d(TAG, "ここは実行されない")
+            } catch (e: Exception) {
+                Log.d(TAG, "キャッチされる")
             }
-        } catch (e: Exception) {
-            Log.d(TAG, "キャッチされない")
         }
     }
 
