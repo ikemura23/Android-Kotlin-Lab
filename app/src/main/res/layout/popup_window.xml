@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_margin="8dp"
-        android:text="Popup"
+        android:text="Popup Popup"
         android:textSize="22sp"
         />
 </FrameLayout>

@@ -1,8 +1,10 @@
 package com.ikemura.android_kotlin_lab.main
 
 import android.content.Context.LAYOUT_INFLATER_SERVICE
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,12 +43,24 @@ class MainFragment : Fragment() {
         val popupView = inflater.inflate(R.layout.popup_window, null)
         val width = FrameLayout.LayoutParams.WRAP_CONTENT
         val height = FrameLayout.LayoutParams.WRAP_CONTENT
-        PopupWindow(popupView, width, height).showAsDropDown(binding.button, 0, -400)
+        val rect = locateView(binding.button)
+        PopupWindow(popupView, width, height).showAtLocation(binding.button, Gravity.NO_GRAVITY, rect.left, rect.top - binding.button.height)
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.load()
+    }
+
+    private fun locateView(v: View): Rect {
+        val ints = IntArray(2)
+        v.getLocationOnScreen(ints)
+        val location = Rect()
+        location.left = ints[0]
+        location.top = ints[1]
+        location.right = location.left + v.width
+        location.bottom = location.top + v.height
+        return location
     }
 
     private fun setupViewModel() {
