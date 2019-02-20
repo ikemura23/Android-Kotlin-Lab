@@ -11,8 +11,9 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     // 状態（viewModel専用）
     private var _state = MutableLiveData<ScreenState>()
+
+    // 外部公開用
     val state = Transformations.distinctUntilChanged(_state)
-    // コルーチンのジョブ
 
     // データ読み込み
     fun load() {
