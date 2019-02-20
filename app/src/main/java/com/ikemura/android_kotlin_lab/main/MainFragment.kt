@@ -60,20 +60,20 @@ class MainFragment : Fragment() {
 //        PopupWindow(popupView, width, height).showAsDropDown(binding.button)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.load()
-    }
-
     private fun locateView(v: View): Rect {
         val ints = IntArray(2)
         v.getLocationOnScreen(ints)
-        val location = Rect()
-        location.left = ints[0]
-        location.top = ints[1]
-        location.right = location.left + v.width
-        location.bottom = location.top + v.height
-        return location
+        return Rect().apply {
+            left = ints[0]
+            top = ints[1]
+            right = left + v.width
+            bottom = top + v.height
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.load()
     }
 
     private fun setupViewModel() {
