@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         setupViewModel()
         binding.button.setOnClickListener {
-            //            showPopupWindow()
+            showPopupWindow()
             shoAndHideAnimationView()
         }
     }
@@ -56,7 +56,8 @@ class MainFragment : Fragment() {
         val width = FrameLayout.LayoutParams.WRAP_CONTENT
         val height = FrameLayout.LayoutParams.WRAP_CONTENT
         val rect = locateView(binding.button)
-        PopupWindow(popupView, width, height).showAtLocation(binding.button, Gravity.NO_GRAVITY, rect.left, rect.top - binding.button.height)
+        PopupWindow(popupView, width, height).showAtLocation(binding.button, Gravity.NO_GRAVITY, rect.left, rect.bottom)
+//        PopupWindow(popupView, width, height).showAsDropDown(binding.button)
     }
 
     override fun onResume() {
