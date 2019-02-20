@@ -8,7 +8,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.PopupWindow
 import androidx.databinding.DataBindingUtil
@@ -17,10 +17,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
@@ -42,14 +38,15 @@ class MainFragment : Fragment() {
         setupViewModel()
         binding.button.setOnClickListener {
             //            showPopupWindow()
-            binding.fukidasi.visibility = View.VISIBLE
-            GlobalScope.launch(Dispatchers.Main) {
-                delay(2000)
-                val alphaAnimation = AlphaAnimation(1f, 0f).apply { duration = 1000 }
-                binding.fukidasi.startAnimation(alphaAnimation)
-                delay(1000)
-                binding.fukidasi.visibility = View.GONE
-            }
+            shoAndHideAnimationView()
+        }
+    }
+
+    private fun shoAndHideAnimationView() {
+        binding.fukidasi.apply {
+            visibility = View.VISIBLE
+            val animation = AnimationUtils.loadAnimation(context, R.anim.alpha_fadeout)
+            postDelayed({ startAnimation(animation) }, 2000)
         }
     }
 
