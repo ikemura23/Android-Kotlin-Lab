@@ -35,7 +35,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         setupViewModel()
-        binding.button.setOnClickListener { showPopupWindow() }
+        binding.button.setOnClickListener {
+            //            showPopupWindow()
+            binding.fukidasi.visibility = View.VISIBLE
+        }
     }
 
     private fun showPopupWindow() {
