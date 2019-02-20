@@ -1,10 +1,14 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.PopupWindow
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,6 +34,15 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         setupViewModel()
+        binding.button.setOnClickListener { showPopupWindow() }
+    }
+
+    private fun showPopupWindow() {
+        val inflater = requireActivity().getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupView = inflater.inflate(R.layout.popup_window, null)
+        val width = FrameLayout.LayoutParams.WRAP_CONTENT
+        val height = FrameLayout.LayoutParams.WRAP_CONTENT
+        PopupWindow(popupView, width, height).showAtLocation(popupView, Gravity.NO_GRAVITY, 0, 0)
     }
 
     override fun onResume() {
