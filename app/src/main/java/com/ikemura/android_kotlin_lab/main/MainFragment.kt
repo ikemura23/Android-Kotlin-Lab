@@ -3,7 +3,6 @@ package com.ikemura.android_kotlin_lab.main
 import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,7 @@ class MainFragment : Fragment() {
         val popupView = inflater.inflate(R.layout.popup_window, null)
         val width = FrameLayout.LayoutParams.WRAP_CONTENT
         val height = FrameLayout.LayoutParams.WRAP_CONTENT
-        PopupWindow(popupView, width, height).showAtLocation(popupView, Gravity.NO_GRAVITY, 0, 0)
+        PopupWindow(popupView, width, height).showAsDropDown(binding.button, 0, -400)
     }
 
     override fun onResume() {
