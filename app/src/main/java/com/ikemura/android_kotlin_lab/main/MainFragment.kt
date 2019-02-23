@@ -82,25 +82,26 @@ class MainFragment : Fragment() {
      * objectAnimatorを使うアニメーション
      */
     private fun showAndHideAnimation3(view: View) {
-        view.visibility = View.VISIBLE
-        view.alpha = 1f
         val animator = AnimatorInflater.loadAnimator(context, R.animator.alpha_fadeout)
         with(animator) {
             setTarget(view)
-            addListener(AnimatorOnAnimationEndCallback {
-                view.visibility = View.GONE
-            })
-//            addListener(object : Animator.AnimatorListener {
-//                override fun onAnimationRepeat(animation: Animator?) {}
-//
-//                override fun onAnimationEnd(animation: Animator?) {}
-//
-//                override fun onAnimationCancel(animation: Animator?) {}
-//
-//                override fun onAnimationStart(animation: Animator?) {
-//                    view.visibility = View.GONE
-//                }
+//            addListener(AnimatorOnAnimationEndCallback {
+//                view.visibility = View.GONE
 //            })
+            addListener(object : Animator.AnimatorListener {
+                override fun onAnimationRepeat(animation: Animator?) {}
+
+                override fun onAnimationStart(animation: Animator?) {
+                    view.visibility = View.VISIBLE
+                    view.alpha = 1f
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    view.visibility = View.GONE
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {}
+            })
             start()
         }
     }
