@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:ordering="sequentially"
     >
-    <objectAnimator android:duration="1000" />
     <objectAnimator
+        android:startOffset="2000"
         android:duration="1000"
         android:propertyName="alpha"
         android:valueTo="0f"
