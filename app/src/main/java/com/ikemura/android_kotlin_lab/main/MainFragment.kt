@@ -55,8 +55,6 @@ class MainFragment : Fragment() {
      * コードでアニメーションを指定
      */
     private fun showAndHideAnimation1(view: View) {
-        view.visibility = View.VISIBLE
-        view.alpha = 1f
         view.run {
             visibility = View.VISIBLE
             postDelayed({
@@ -69,8 +67,6 @@ class MainFragment : Fragment() {
      * animを使ったアニメーション
      */
     private fun showAndHideAnimation2(view: View) {
-        view.alpha = 1f
-        view.visibility = View.VISIBLE
         view.run {
             visibility = View.VISIBLE
             val animation = AnimationUtils.loadAnimation(context, R.anim.alpha_fadeout)
@@ -82,28 +78,25 @@ class MainFragment : Fragment() {
      * objectAnimatorを使うアニメーション
      */
     private fun showAndHideAnimation3(view: View) {
-        val animator = AnimatorInflater.loadAnimator(context, R.animator.alpha_fadeout)
-        with(animator) {
-            setTarget(view)
-//            addListener(AnimatorOnAnimationEndCallback {
-//                view.visibility = View.GONE
-//            })
-            addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator?) {}
+        AnimatorInflater
+                .loadAnimator(context, R.animator.alpha_fadeout)
+                .run {
+                    setTarget(view)
+                    addListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(anim: Animator?) {}
 
-                override fun onAnimationStart(animation: Animator?) {
-                    view.visibility = View.VISIBLE
-                    view.alpha = 1f
+                        override fun onAnimationStart(anim: Animator?) {
+                            view.visibility = View.VISIBLE
+                        }
+
+                        override fun onAnimationEnd(anim: Animator?) {
+                            view.visibility = View.GONE
+                        }
+
+                        override fun onAnimationCancel(anim: Animator?) {}
+                    })
+                    start()
                 }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    view.visibility = View.GONE
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {}
-            })
-            start()
-        }
     }
 
     class AnimatorOnAnimationEndCallback(private val block: (Animator) -> Unit) : Animator.AnimatorListener {
