@@ -35,4 +35,14 @@ class WebViewFragment : Fragment() {
             settings.cacheMode = WebSettings.LOAD_NO_CACHE
         }.loadUrl(url)
     }
+
+    override fun onResume() {
+        super.onResume()
+        webView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        webView.onPause()
+    }
 }
