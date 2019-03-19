@@ -38,11 +38,11 @@ class WebViewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        webView.onResume()
+//        webView.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        webView.onPause()
+//        webView.onPause()
     }
 }
