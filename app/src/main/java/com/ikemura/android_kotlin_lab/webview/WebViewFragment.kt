@@ -27,7 +27,7 @@ class WebViewFragment : Fragment() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView() {
-        val url = "https://www.dailymotion.com/video/x5x7cgf"
+        val url = "https://www.youtube.com/watch?v=4t734E4TKsk"
         webView.apply {
             settings.javaScriptEnabled = true
             webChromeClient = WebChromeClient()
