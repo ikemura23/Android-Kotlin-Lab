@@ -42,8 +42,11 @@ class MainFragment : Fragment() {
         setupCameraView()
     }
 
+    /**
+     * カメラ設定
+     */
     private fun setupCameraView() {
-        cameraView.setLifecycleOwner(this)
+        cameraView.setLifecycleOwner(viewLifecycleOwner)
         cameraView.grid = Grid.DRAW_3X3
         cameraView.addFrameProcessor { frame ->
             val metadata = FirebaseVisionImageMetadata.Builder()
