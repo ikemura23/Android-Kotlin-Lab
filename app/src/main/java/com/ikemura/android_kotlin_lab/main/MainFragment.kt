@@ -1,5 +1,6 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
+import com.ikemura.android_kotlin_lab.next.NextActivity
 import com.otaliastudios.cameraview.Grid
 import kotlinx.android.synthetic.main.main_fragment.cameraView
 import java.nio.ByteBuffer
@@ -75,7 +77,7 @@ class MainFragment : Fragment() {
                 .addOnSuccessListener {
                     for (firebaseBarcode in it) {
                         when (firebaseBarcode.format) {
-                            FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { it1 -> showToast("CODE_128 $it1") }
+                            FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { barcode -> detectedBarcode(barcode) }
                             else -> firebaseBarcode.displayValue?.let { it1 -> showToast("else $it1") }
                         }
                     }
@@ -83,6 +85,13 @@ class MainFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(context, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show()
                 }
+    }
+
+    private fun detectedBarcode(value: String) {
+        val intent = Intent(context, NextActivity::class.java).apply {
+            putExtra("barcode", value)
+        }
+        startActivity(intent)
     }
 
     private fun showToast(text: String) {
