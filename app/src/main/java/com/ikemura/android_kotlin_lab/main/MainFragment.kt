@@ -57,16 +57,17 @@ class MainFragment : Fragment() {
      */
     private fun setupCameraView() {
         cameraView.setLifecycleOwner(viewLifecycleOwner)
-        cameraView.grid = Grid.DRAW_3X3
+        cameraView.grid = Grid.DRAW_3X3 // グリッド表示
         cameraView.addFrameProcessor { frame ->
             val metadata = FirebaseVisionImageMetadata.Builder()
                     .setFormat(FirebaseVisionImageMetadata.IMAGE_FORMAT_NV21)
                     .setWidth(frame.size.width)
                     .setHeight(frame.size.height)
-                    .setRotation(frame.rotation / 90)
+                    .setRotation(frame.rotation / 90) // 90で割り切れないとIllegalArgumentException
                     .build()
             val byteBuffer: ByteBuffer = ByteBuffer.wrap(frame.data)
             val image = FirebaseVisionImage.fromByteBuffer(byteBuffer, metadata)
+            // 読み込んだ画像からバーコード検出する
             viewModel.detectBarcode(image)
         }
     }
