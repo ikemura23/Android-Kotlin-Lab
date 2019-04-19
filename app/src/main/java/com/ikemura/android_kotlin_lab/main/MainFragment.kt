@@ -39,22 +39,22 @@ class MainFragment : Fragment() {
 
     private fun setupViewModel() {
         // 状態の管理
-        viewModel.state.observe(this, Observer<ScreenState> { state ->
-            when (state) {
-                is ScreenState.Loading -> {
-                    //ローディング処理
-                    Log.d("MainFragment", "Loading")
-                }
-                is ScreenState.Data -> {
-                    //データ取得
-                    Log.d("MainFragment", state.someData.toString())
-                    binding.message.text = state.someData.id.toString()
-                }
-                is ScreenState.Error -> {
-                    //エラー処理
-                    Log.d("MainFragment", "Error")
-                }
-            }
-        })
+//        viewModel.state.observe(this, Observer<ScreenState> { state ->
+//            when (state) {
+//                is ScreenState.Loading -> {
+//                    //ローディング処理
+//                    Log.d("MainFragment", "Loading")
+//                }
+//                is ScreenState.Data -> {
+//                    //データ取得
+//                    Log.d("MainFragment", state.someData.toString())
+//                    binding.message.text = state.someData.id.toString()
+//                }
+//                is ScreenState.Error -> {
+//                    //エラー処理
+//                    Log.d("MainFragment", "Error")
+//                }
+//            }
+//        })
     }
 }
