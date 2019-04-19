@@ -65,7 +65,7 @@ class MainFragment : Fragment() {
 
         val options = FirebaseVisionBarcodeDetectorOptions.Builder()
                 .setBarcodeFormats(
-                    FirebaseVisionBarcode.FORMAT_ALL_FORMATS
+                    FirebaseVisionBarcode.FORMAT_CODE_128
                 )
                 .build()
 
@@ -74,9 +74,9 @@ class MainFragment : Fragment() {
         detector.detectInImage(firebaseVisionImage)
                 .addOnSuccessListener {
                     for (firebaseBarcode in it) {
-                        when (firebaseBarcode.valueType) {
-                            FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { it1 -> showToast(it1) }
-                            else -> firebaseBarcode.displayValue?.let { it1 -> showToast(it1) }
+                        when (firebaseBarcode.format) {
+                            FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { it1 -> showToast("CODE_128 $it1") }
+                            else -> firebaseBarcode.displayValue?.let { it1 -> showToast("else $it1") }
                         }
                     }
                 }
