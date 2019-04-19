@@ -8,12 +8,11 @@ import com.ikemura.android_kotlin_lab.R
 
 class MainActivity : AppCompatActivity() {
 
-    private val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         setupFragment()
     }
 
