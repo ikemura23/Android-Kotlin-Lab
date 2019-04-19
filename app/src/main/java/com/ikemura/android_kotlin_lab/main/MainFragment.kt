@@ -2,16 +2,14 @@ package com.ikemura.android_kotlin_lab.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import com.ikemura.android_kotlin_lab.R
@@ -23,6 +21,7 @@ import java.nio.ByteBuffer
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
+    private lateinit var viewModel: MainViewModel
 
     companion object {
         fun newInstance() = MainFragment()
@@ -41,7 +40,16 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
         setupCameraView()
+    }
+
+    /**
+     * ViewModel設定
+     */
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.navigationEvent.observe(viewLifecycleOwner, Observer(::onNavigated))
     }
 
     /**
@@ -59,43 +67,25 @@ class MainFragment : Fragment() {
                     .build()
             val byteBuffer: ByteBuffer = ByteBuffer.wrap(frame.data)
             val image = FirebaseVisionImage.fromByteBuffer(byteBuffer, metadata)
-            runBarcodeScanner(image)
+            viewModel.detectBarcode(image)
         }
     }
 
-    private fun runBarcodeScanner(firebaseVisionImage: FirebaseVisionImage) {
-
-        val options = FirebaseVisionBarcodeDetectorOptions.Builder()
-                .setBarcodeFormats(
-                    FirebaseVisionBarcode.FORMAT_CODE_128
-                )
-                .build()
-
-        val detector = FirebaseVision.getInstance().getVisionBarcodeDetector(options)
-
-        detector.detectInImage(firebaseVisionImage)
-                .addOnSuccessListener {
-                    for (firebaseBarcode in it) {
-                        when (firebaseBarcode.format) {
-                            FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { barcode -> detectedBarcode(barcode) }
-                            else -> firebaseBarcode.displayValue?.let { it1 -> showToast("else $it1") }
-                        }
-                    }
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show()
-                }
+    private fun onNavigated(event: MainViewModel.Nav) {
+        when (event) {
+            is MainViewModel.Nav.GoToNext -> {
+                startNextActivity(event.barcodeNumber)
+            }
+            is MainViewModel.Nav.Failure -> {
+                Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    private fun detectedBarcode(value: String) {
+    private fun startNextActivity(value: String) {
         val intent = Intent(context, NextActivity::class.java).apply {
             putExtra("barcode", value)
         }
         startActivity(intent)
-    }
-
-    private fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-        Log.d("Detected", text)
     }
 }
