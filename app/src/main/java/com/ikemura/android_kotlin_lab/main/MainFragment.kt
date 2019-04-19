@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.google.firebase.FirebaseApp
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions
@@ -19,7 +18,6 @@ import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraOptions
-import com.otaliastudios.cameraview.FrameProcessor
 import com.otaliastudios.cameraview.Grid
 import com.otaliastudios.cameraview.PictureResult
 import kotlinx.android.synthetic.main.main_fragment.cameraView
@@ -63,7 +61,6 @@ class MainFragment : Fragment() {
 
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
-                Log.d("Detected", "onPictureTaken")
                 result.toBitmap { bitmap ->
                     bitmap?.let {
                         runBarcodeScanner(it)
@@ -73,10 +70,10 @@ class MainFragment : Fragment() {
                 }
             }
         })
-        val frameProcessor = FrameProcessor { frame ->
+        cameraView.addFrameProcessor { frame ->
             val now = System.currentTimeMillis()
             if (now - lastFrameTimeElapsed < previewRate) {
-                return@FrameProcessor
+                return@addFrameProcessor
             }
 
             lastFrameTimeElapsed = now
@@ -90,24 +87,6 @@ class MainFragment : Fragment() {
             val image = FirebaseVisionImage.fromByteBuffer(byteBuffer, metadata)
             runBarcodeScanner(image)
         }
-        cameraView.addFrameProcessor(frameProcessor)
-//        cameraView.addFrameProcessor { frame ->
-//            val options = BitmapFactory.Options().apply {
-//                inJustDecodeBounds = true
-//            }
-//            val bitmap: Bitmap? = BitmapFactory.decodeByteArray(frame.data, 0, frame.data.size, options)
-//            if (bitmap == null) {
-//                Log.d("addFrameProcessor", "bitmap == null")
-//            }
-//            val metadata = FirebaseVisionImageMetadata.Builder()
-//                    .setFormat(FirebaseVisionImageMetadata.IMAGE_FORMAT_NV21)
-//                    .setWidth(frame.size.width)
-//                    .setHeight(frame.size.height)
-//                    .setRotation(frame.rotation / 90)
-//                    .build()
-//            val firebaseVisionImage = FirebaseVisionImage.fromByteArray(frame.data, metadata)
-//
-//        }
     }
 
     private fun runBarcodeScanner(firebaseVisionImage: FirebaseVisionImage) {
@@ -123,7 +102,6 @@ class MainFragment : Fragment() {
         detector.detectInImage(firebaseVisionImage)
                 .addOnSuccessListener {
                     for (firebaseBarcode in it) {
-                        Log.d("Detected", it.toString())
                         when (firebaseBarcode.valueType) {
                             FirebaseVisionBarcode.FORMAT_CODE_128 -> firebaseBarcode.displayValue?.let { it1 -> showToast(it1) }
                             else -> firebaseBarcode.displayValue?.let { it1 -> showToast(it1) }
@@ -132,9 +110,6 @@ class MainFragment : Fragment() {
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show()
-                }
-                .addOnCompleteListener {
-//                    Toast.makeText(context, "addOnCompleteListener", Toast.LENGTH_SHORT).show()
                 }
     }
 
@@ -209,10 +184,5 @@ class MainFragment : Fragment() {
     protected fun showPreview() {
         framePreview.visibility = View.VISIBLE
         cameraView.visibility = View.GONE
-    }
-
-    protected fun hidePreview() {
-        framePreview.visibility = View.GONE
-        cameraView.visibility = View.VISIBLE
     }
 }
