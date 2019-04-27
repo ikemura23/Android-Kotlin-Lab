@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -29,6 +31,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -45,6 +51,10 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0-alpha05'
     implementation 'androidx.fragment:fragment-ktx:1.1.0-alpha06'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha04'
+    // Epoxy
+    implementation 'com.airbnb.android:epoxy:3.4.2'
+    // Epoxyの注釈を使用している場合は注釈プロセッサを追加してください（推奨）
+    annotationProcessor 'com.airbnb.android:epoxy-processor:3.4.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
