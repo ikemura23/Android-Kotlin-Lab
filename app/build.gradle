@@ -54,7 +54,7 @@ dependencies {
     // Epoxy
     implementation 'com.airbnb.android:epoxy:3.4.2'
     // Epoxyの注釈を使用している場合は注釈プロセッサを追加してください（推奨）
-    annotationProcessor 'com.airbnb.android:epoxy-processor:3.4.2'
+    kapt 'com.airbnb.android:epoxy-processor:3.4.2'
     implementation 'com.airbnb.android:epoxy-databinding:3.4.2'
 
     testImplementation 'junit:junit:4.12'
