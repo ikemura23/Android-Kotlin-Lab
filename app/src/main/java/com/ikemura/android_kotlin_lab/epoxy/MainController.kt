@@ -13,7 +13,9 @@ class MainController : TypedEpoxyController<DummyContent.DummyItem>() {
             title("Hello Epoxy!")
         }
         epoxyListItem {
-
+            id("item number")
+            index("1")
+            text("first")
         }
     }
 }

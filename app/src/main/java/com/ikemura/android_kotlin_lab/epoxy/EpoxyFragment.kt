@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.ikemura.android_kotlin_lab.R
-import com.ikemura.android_kotlin_lab.epoxy.dummy.DummyContent
 import com.ikemura.android_kotlin_lab.epoxy.dummy.DummyContent.DummyItem
+import kotlinx.android.synthetic.main.epoxy_fragment.recycler_view
 
 /**
  * Epoxy Fragment
@@ -20,13 +19,14 @@ class EpoxyFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.epoxy_fragment, container, false)
-        if (view is RecyclerView) {
-            with(view) {
-                adapter = EpoxyListRecyclerViewAdapter(DummyContent.ITEMS, listener)
-            }
-        }
-        return view
+        return inflater.inflate(R.layout.epoxy_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val controller = MainController()
+        recycler_view.adapter = controller.adapter
+        controller.setData(DummyItem("1", "2", "3"))
     }
 
     override fun onAttach(context: Context) {
