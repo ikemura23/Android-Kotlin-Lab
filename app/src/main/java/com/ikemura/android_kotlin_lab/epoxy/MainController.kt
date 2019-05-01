@@ -1,21 +1,34 @@
 package com.ikemura.android_kotlin_lab.epoxy
 
+import com.airbnb.epoxy.AutoModel
 import com.airbnb.epoxy.TypedEpoxyController
+import com.ikemura.android_kotlin_lab.BodyViewBindingModel_
+import com.ikemura.android_kotlin_lab.FooterViewBindingModel_
+import com.ikemura.android_kotlin_lab.HeaderViewBindingModel_
 import com.ikemura.android_kotlin_lab.epoxy.dummy.DummyContent
-import com.ikemura.android_kotlin_lab.epoxyListItem
-import com.ikemura.android_kotlin_lab.headerView
 
 class MainController : TypedEpoxyController<DummyContent.DummyItem>() {
+    @AutoModel
+    lateinit var headerView: HeaderViewBindingModel_
+    @AutoModel
+    lateinit var bodyView: BodyViewBindingModel_
+    @AutoModel
+    lateinit var footerView: FooterViewBindingModel_
+
     override fun buildModels(item: DummyContent.DummyItem?) {
         item ?: return
-        headerView {
-            id("title")
-            title("Hello Epoxy!")
-        }
-        epoxyListItem {
-            id("item number")
-            index("1")
-            text("first")
-        }
+//        headerView {
+//            id("header")
+//        }
+//        bodyView {
+//            id("body")
+//        }
+//        footerView {
+//            id("footer")
+//        }
+
+        headerView.addTo(this)
+        bodyView.addTo(this)
+        footerView.addTo(this)
     }
 }
