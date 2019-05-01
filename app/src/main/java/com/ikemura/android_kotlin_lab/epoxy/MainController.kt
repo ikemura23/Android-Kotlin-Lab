@@ -1,13 +1,12 @@
 package com.ikemura.android_kotlin_lab.epoxy
 
 import com.airbnb.epoxy.AutoModel
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.EpoxyController
 import com.ikemura.android_kotlin_lab.BodyViewBindingModel_
 import com.ikemura.android_kotlin_lab.FooterViewBindingModel_
 import com.ikemura.android_kotlin_lab.HeaderViewBindingModel_
-import com.ikemura.android_kotlin_lab.epoxy.dummy.DummyContent
 
-class MainController : TypedEpoxyController<DummyContent.DummyItem>() {
+class MainController : EpoxyController() {
     @AutoModel
     lateinit var headerView: HeaderViewBindingModel_
     @AutoModel
@@ -15,8 +14,7 @@ class MainController : TypedEpoxyController<DummyContent.DummyItem>() {
     @AutoModel
     lateinit var footerView: FooterViewBindingModel_
 
-    override fun buildModels(item: DummyContent.DummyItem?) {
-        item ?: return
+    override fun buildModels() {
 //        headerView {
 //            id("header")
 //        }

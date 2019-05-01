@@ -26,7 +26,9 @@ class EpoxyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val controller = MainController()
         recycler_view.adapter = controller.adapter
-        controller.setData(DummyItem("1", "2", "3"))
+        controller.requestModelBuild()
+        // データを渡すとき
+//        controller.setData(DummyItem("1", "2", "3"))
     }
 
     override fun onAttach(context: Context) {
