@@ -34,7 +34,8 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.load()
+//        viewModel.load()
+        viewModel.loadGraphql()
     }
 
     private fun setupViewModel() {
