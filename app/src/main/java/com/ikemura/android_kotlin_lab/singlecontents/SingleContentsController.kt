@@ -16,12 +16,4 @@ class SingleContentsController : Typed2EpoxyController<String, Data>() {
             data(body)
         }
     }
-
-    // override fun buildModels(title, body: Data) {
-    //     simpleContentView {
-    //         id("body1")
-    //         data(_data)
-    //     }
-    // }
-
 }
