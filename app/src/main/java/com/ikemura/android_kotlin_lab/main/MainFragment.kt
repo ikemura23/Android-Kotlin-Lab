@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 
@@ -20,15 +20,16 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         setupViewModel()
     }
 
@@ -39,7 +40,7 @@ class MainFragment : Fragment() {
 
     private fun setupViewModel() {
         // 状態の管理
-        viewModel.state.observe(this, Observer<ScreenState> { state ->
+        viewModel.state.observe(viewLifecycleOwner, Observer<ScreenState> { state ->
             when (state) {
                 is ScreenState.Loading -> {
                     //ローディング処理
