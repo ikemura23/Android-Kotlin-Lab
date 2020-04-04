@@ -17,6 +17,12 @@ class MainViewModel : ViewModel() {
     // 外部公開用
     val state = Transformations.distinctUntilChanged(_state)
 
+    // 変数宣言と共に、liveData関数の中に非同期処理を実装できる
+    val data: LiveData<String> = liveData {
+        // 結果を出力
+        emit("Hello")
+    }
+
     val ktxLiveData: LiveData<ScreenState> = liveData {
         emit(ScreenState.Loading)
         val data = doSomeThing()

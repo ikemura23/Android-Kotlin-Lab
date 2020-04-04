@@ -35,6 +35,17 @@ class MainFragment : Fragment() {
     }
 
     private fun loadKtxLiveData() {
+        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
+            Log.d("MainFragment", data)
+            binding.message.text = data
+        })
+        // 2回購読しても大丈夫
+        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
+            Log.d("MainFragment", data)
+            binding.message.text = data
+        })
+
+
         viewModel.ktxLiveData.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is ScreenState.Loading -> {
