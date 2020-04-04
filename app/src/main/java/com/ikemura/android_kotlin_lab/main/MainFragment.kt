@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
 
     private fun setupViewModel() {
         // 状態の管理
-        viewModel.state.observe(this, Observer<ScreenState> { state ->
+        viewModel.state.observe(viewLifecycleOwner, Observer<ScreenState> { state ->
             when (state) {
                 is ScreenState.Loading -> {
                     //ローディング処理
