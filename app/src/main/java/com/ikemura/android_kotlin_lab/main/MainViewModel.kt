@@ -1,8 +1,10 @@
 package com.ikemura.android_kotlin_lab.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -14,6 +16,18 @@ class MainViewModel : ViewModel() {
 
     // 外部公開用
     val state = Transformations.distinctUntilChanged(_state)
+
+    val ktxLiveData: LiveData<ScreenState> = liveData {
+        emit(ScreenState.Loading)
+        val data = doSomeThing()
+        emit(ScreenState.Data(data))
+    }
+
+    // API通信やDB取得などの処理
+    private suspend fun doSomeThing(): SomeData {
+        delay(3000L)
+        return SomeData(123)
+    }
 
     // データ読み込み
     fun load() {

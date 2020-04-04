@@ -31,12 +31,32 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        setupViewModel()
+        // setupViewModel()
+    }
+
+    private fun loadKtxLiveData() {
+        viewModel.ktxLiveData.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is ScreenState.Loading -> {
+                    Log.d("MainFragment", "Loading")
+                }
+                is ScreenState.Data -> {
+                    Log.d("MainFragment", "Data: ${state.someData}")
+                    binding.message.text = state.someData.id.toString()
+                    Log.d("MainFragment", "Finish")
+                }
+                is ScreenState.Error -> {
+                    // Error handling
+                    Log.d("MainFragment", "Error")
+                }
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.load()
+        // viewModel.load()
+        loadKtxLiveData()
     }
 
     private fun setupViewModel() {
