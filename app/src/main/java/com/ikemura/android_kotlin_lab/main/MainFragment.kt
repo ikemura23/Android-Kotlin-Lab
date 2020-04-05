@@ -21,34 +21,36 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        binding.viewModel = viewModel
     }
 
     private fun loadKtxLiveData() {
-        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
-            Log.d("MainFragment", data)
-            binding.message.text = data
-        })
-        // 2回購読しても大丈夫
-        viewModel.data.observe(viewLifecycleOwner, Observer { data ->
-            Log.d("MainFragment", data)
-            binding.message.text = data
-        })
-
+        // viewModel.data.observe(viewLifecycleOwner, Observer { data ->
+        //     Log.d("MainFragment", data)
+        //     binding.message.text = data
+        // })
+        // // 2回購読しても大丈夫
+        // viewModel.data.observe(viewLifecycleOwner, Observer { data ->
+        //     Log.d("MainFragment", data)
+        //     binding.message.text = data
+        // })
 
         viewModel.ktxLiveData.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is ScreenState.Loading -> {
+                    binding.stateMessage.text = "Loading"
                     Log.d("MainFragment", "Loading")
                 }
                 is ScreenState.Data -> {
                     Log.d("MainFragment", "Data: ${state.someData}")
-                    binding.message.text = state.someData.id.toString()
+                    binding.stateMessage.text = state.someData.id.toString()
                     Log.d("MainFragment", "Finish")
                 }
                 is ScreenState.Error -> {

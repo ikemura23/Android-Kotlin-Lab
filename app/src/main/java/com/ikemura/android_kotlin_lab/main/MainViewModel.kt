@@ -22,6 +22,7 @@ class MainViewModel : ViewModel() {
     // API通信やDB取得などの処理
     private suspend fun doSomeThing(): SomeData {
         delay(3000L)
-        return SomeData(123)
+        val randomInt = (1..1000).shuffled().first() // 1〜1000の乱数
+        return SomeData(randomInt)
     }
 }
