@@ -16,10 +16,6 @@ class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var viewModel: MainViewModel
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +27,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // setupViewModel()
     }
 
     private fun loadKtxLiveData() {
@@ -66,28 +61,10 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // viewModel.load()
         loadKtxLiveData()
     }
 
-    private fun setupViewModel() {
-        // 状態の管理
-        viewModel.state.observe(viewLifecycleOwner, Observer<ScreenState> { state ->
-            when (state) {
-                is ScreenState.Loading -> {
-                    //ローディング処理
-                    Log.d("MainFragment", "Loading")
-                }
-                is ScreenState.Data -> {
-                    //データ取得
-                    Log.d("MainFragment", state.someData.toString())
-                    binding.message.text = state.someData.id.toString()
-                }
-                is ScreenState.Error -> {
-                    //エラー処理
-                    Log.d("MainFragment", "Error")
-                }
-            }
-        })
+    companion object {
+        fun newInstance() = MainFragment()
     }
 }
