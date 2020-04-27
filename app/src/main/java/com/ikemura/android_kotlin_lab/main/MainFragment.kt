@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
@@ -32,7 +33,15 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
-        binding.button.setOnClickListener { navigateToList() }
+        // 画面遷移 1
+        // binding.button.setOnClickListener { navigateToList() }
+        // 画面遷移 2
+        binding.button.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_mainFragment_to_itemFragment,
+                null
+            )
+        )
     }
 
     override fun onResume() {
