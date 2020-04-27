@@ -34,8 +34,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         // 画面遷移 1
-        // binding.button.setOnClickListener { navigateToList() }
+        // binding.button.setOnClickListener { navigateToList1() }
         // 画面遷移 2
+        // binding.button.setOnClickListener { navigateToList2() }
+        // 画面遷移 3
         binding.button.setOnClickListener(
             Navigation.createNavigateOnClickListener(
                 R.id.action_mainFragment_to_itemFragment,
@@ -50,8 +52,15 @@ class MainFragment : Fragment() {
     }
 
     // 画面遷移
-    private fun navigateToList() {
+    private fun navigateToList1() {
         findNavController().navigate(R.id.action_mainFragment_to_itemFragment)
+    }
+
+    // 画面遷移
+    private fun navigateToList2() {
+        MainFragmentDirections.actionMainFragmentToItemFragment().let {
+            findNavController().navigate(it)
+        }
     }
 
     private fun setupViewModel() {
