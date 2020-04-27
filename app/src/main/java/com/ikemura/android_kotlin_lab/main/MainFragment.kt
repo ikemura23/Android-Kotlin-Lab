@@ -51,14 +51,15 @@ class MainFragment : Fragment() {
         viewModel.load()
     }
 
-    // 画面遷移
+    // 画面遷移 1
     private fun navigateToList1() {
         findNavController().navigate(R.id.action_mainFragment_to_itemFragment)
     }
 
-    // 画面遷移
+    // 画面遷移 2 （推奨）
     private fun navigateToList2() {
-        MainFragmentDirections.actionMainFragmentToItemFragment().let {
+        val arg = 123
+        MainFragmentDirections.actionMainFragmentToItemFragment(arg).let {
             findNavController().navigate(it)
         }
     }

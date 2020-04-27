@@ -22,5 +22,10 @@
         android:name="com.ikemura.android_kotlin_lab.list.ItemFragment"
         android:label="fragment_item_list"
         tools:layout="@layout/fragment_item_list"
-        />
+        >
+        <argument android:name="id"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </fragment>
 </navigation>
