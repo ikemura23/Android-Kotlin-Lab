@@ -4,8 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 static def getCustomVersionCode() {
-    def formattedDate = new Date().format('yyMMddHHmm').toInteger()
-    return formattedDate.toInteger()
+    return new Date().format('yyMMddHHmm').toInteger()
 }
 
 android {
