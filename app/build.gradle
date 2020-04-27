@@ -3,8 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def getCustomVersionCode() {
-    def formattedDate = new Date().format('yyMMddHHmm')
+static def getCustomVersionCode() {
+    def formattedDate = new Date().format('yyMMddHHmm').toInteger()
     return formattedDate.toInteger()
 }
 
