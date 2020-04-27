@@ -82,3 +82,4 @@ lint/tmp/
 # lint/reports/
 
 .idea/jarRepositories.xml
+/.idea/navEditor.xml
