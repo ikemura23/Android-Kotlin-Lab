@@ -3,6 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def getCustomVersionCode() {
+    def formattedDate = new Date().format('yyMMddHHmm')
+    return formattedDate.toInteger()
+}
+
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -10,7 +15,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-${getCustomVersionCode()}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 //    signingConfigs {
