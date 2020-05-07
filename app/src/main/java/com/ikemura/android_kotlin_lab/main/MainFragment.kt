@@ -7,18 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
-    private val viewModel by viewModels<MainViewModel>()
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,5 +53,9 @@ class MainFragment : Fragment() {
                 }
             }
         })
+    }
+
+    companion object {
+        fun newInstance() = MainFragment()
     }
 }

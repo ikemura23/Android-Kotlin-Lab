@@ -5,14 +5,12 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ikemura.android_kotlin_lab.repository.ISampleRepository
-import com.ikemura.android_kotlin_lab.repository.SampleRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val repository: ISampleRepository) : ViewModel() {
     // 状態（viewModel専用）
     private var _state = MutableLiveData<ScreenState>()
-    private val repository: ISampleRepository = SampleRepository()
 
     // 外部公開用
     val state = Transformations.distinctUntilChanged(_state)
