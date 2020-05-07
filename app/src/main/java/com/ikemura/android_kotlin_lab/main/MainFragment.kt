@@ -49,7 +49,7 @@ class MainFragment : Fragment() {
                 is ScreenState.Data -> {
                     //データ取得
                     Log.d("MainFragment", state.someData.toString())
-                    binding.message.text = state.someData.id.toString()
+                    binding.message.text = "${state.someData.id} ${state.someData.label}"
                 }
                 is ScreenState.Error -> {
                     //エラー処理

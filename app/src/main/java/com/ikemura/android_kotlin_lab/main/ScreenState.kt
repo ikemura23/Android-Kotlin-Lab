@@ -17,4 +17,7 @@ sealed class ScreenState {
 /**
  * データクラス
  */
-data class SomeData(val id: Int)
+data class SomeData(
+    val id: Int,
+    val label: String = ""
+)
