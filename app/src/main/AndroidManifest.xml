@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="com.ikemura.android_kotlin_lab"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ikemura.android_kotlin_lab"
     >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
