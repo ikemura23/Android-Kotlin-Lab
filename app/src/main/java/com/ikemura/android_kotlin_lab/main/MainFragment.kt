@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RawRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.ar.sceneform.rendering.ModelRenderable
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,6 +67,19 @@ class MainFragment : Fragment() {
     private fun setMessageText(state: String) {
         Log.d("MainFragment", state)
         binding.message.text = state
+    }
+
+    /**
+     * Used to laod models from 'raw' with a callback when loading is complete
+     */
+    fun loadModel(@RawRes model: Int, callback: (ModelRenderable) -> Unit) {
+        ModelRenderable
+            .builder()
+            .setSource(context, model)
+            .build()
+            .thenAccept { modelRenderable ->
+                callback(modelRenderable)
+            }
     }
 
     companion object {
