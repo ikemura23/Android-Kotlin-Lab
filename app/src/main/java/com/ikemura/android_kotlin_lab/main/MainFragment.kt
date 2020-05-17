@@ -11,7 +11,10 @@ import androidx.annotation.RawRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.ar.core.HitResult
+import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.ux.TransformableNode
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
