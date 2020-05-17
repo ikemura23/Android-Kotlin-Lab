@@ -1,10 +1,8 @@
 package com.ikemura.android_kotlin_lab.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
 import com.google.ar.core.HitResult
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
@@ -18,19 +16,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // setupFragment()
+        setupFragment()
     }
 
     private fun setupFragment() {
-        supportFragmentManager.commit(false) {
-            replace(R.id.container, MainFragment.newInstance())
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
         arFragment = fragment as ArFragment
-
         arFragment.setOnTapArPlaneListener { hitResult, _, _ ->
             setModelOnUi(hitResult)
         }
