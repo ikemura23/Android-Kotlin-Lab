@@ -28,13 +28,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // FAB -> Card
         binding.fab.setOnClickListener { fab ->
-            val transform = MaterialContainerTransform(requireContext()).apply {
-                startView = fab
-                endView = binding.card
-                pathMotion = MaterialArcMotion()
-                duration = 500
-                scrimColor = Color.TRANSPARENT
-            }
+            val transform = getMaterialContainerTransform(fab, binding.card)
             TransitionManager.beginDelayedTransition(binding.container, transform)
             fab.visibility = View.GONE
             binding.card.visibility = View.VISIBLE
@@ -42,16 +36,20 @@ class MainFragment : Fragment() {
 
         // Card -> Fab
         binding.card.setOnClickListener { card ->
-            val transform = MaterialContainerTransform(requireContext()).apply {
-                startView = card
-                endView = binding.fab
-                pathMotion = MaterialArcMotion()
-                duration = 500
-                scrimColor = Color.TRANSPARENT
-            }
+            val transform = getMaterialContainerTransform(card, binding.fab)
             TransitionManager.beginDelayedTransition(binding.container, transform)
             binding.fab.visibility = View.VISIBLE
             card.visibility = View.GONE
+        }
+    }
+
+    private fun getMaterialContainerTransform(startView_: View, endView_: View): MaterialContainerTransform {
+        return MaterialContainerTransform(requireContext()).apply {
+            startView = startView_
+            endView = endView_
+            pathMotion = MaterialArcMotion()
+            duration = 500
+            scrimColor = Color.TRANSPARENT
         }
     }
 
