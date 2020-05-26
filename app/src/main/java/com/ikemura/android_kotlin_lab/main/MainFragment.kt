@@ -29,9 +29,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
-        binding.button.setOnClickListener {
-            viewModel.load()
-        }
+        // binding.button.setOnClickListener {
+        //     viewModel.load()
+        // }
+
     }
 
     override fun onResume() {
