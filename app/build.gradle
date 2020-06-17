@@ -75,6 +75,10 @@ dependencies {
     // CameraX View class
     implementation 'androidx.camera:camera-view:1.0.0-alpha12'
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
     // Koin for Kotlin
     implementation "org.koin:koin-core:$koin_version"
     // Koin for Android
