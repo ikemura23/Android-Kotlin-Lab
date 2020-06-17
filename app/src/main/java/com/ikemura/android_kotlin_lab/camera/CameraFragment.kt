@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ikemura.android_kotlin_lab.R
+import com.ikemura.android_kotlin_lab.databinding.FragmentCameraBinding
 
 class CameraFragment : Fragment() {
+    private lateinit var binding: FragmentCameraBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +18,8 @@ class CameraFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        binding = FragmentCameraBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     companion object {
