@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab.main
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
+import com.ikemura.android_kotlin_lab.repository.PackageRepository
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -32,6 +34,8 @@ class MainFragment : Fragment() {
         binding.button.setOnClickListener {
             viewModel.load()
         }
+        val list = PackageRepository(requireContext()).load(PackageManager.INSTALL_REASON_USER)
+        Log.d("PackageRepository", list.toString())
     }
 
     override fun onResume() {
