@@ -6,6 +6,7 @@ import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -57,10 +58,17 @@ class CameraFragment : Fragment() {
 
         imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
             Log.d("CameraFragment", result.text)
+            showDialog(result.text)
         })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+    }
+
+    private fun showDialog(text: String) {
+        requireActivity().runOnUiThread {
+            AlertDialog.Builder(requireContext()).setMessage(text).show()
+        }
     }
 
     companion object {
