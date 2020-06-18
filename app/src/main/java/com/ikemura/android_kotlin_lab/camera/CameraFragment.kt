@@ -62,9 +62,9 @@ class CameraFragment : Fragment() {
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
-        imageAnalysis.setAnalyzer(executor, ImageAnalysis.Analyzer { imageProxy ->
-            val rotationDegrees = imageProxy.imageInfo.rotationDegrees
-            analyze(imageProxy, rotationDegrees)
+
+        imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
+            Log.d("CameraFragment", result.text)
         })
 
         val camera: Camera = cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, imageAnalysis, preview)
