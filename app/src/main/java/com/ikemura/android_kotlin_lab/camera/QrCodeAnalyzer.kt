@@ -36,7 +36,7 @@ class QrCodeAnalyzer(
         val buffer = image.planes[0].buffer
         buffer.rewind()
         val byteArray = ByteArray(buffer.remaining())
-        buffer.get(byteArray)
+        buffer.get(byteArray) // これがないとdecodeエラーになる
 
         val source = PlanarYUVLuminanceSource(
             byteArray,
@@ -48,7 +48,8 @@ class QrCodeAnalyzer(
             image.height,
             false
         )
-        val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
+        val binarizer = HybridBinarizer(source)
+        val binaryBitmap = BinaryBitmap(binarizer)
         try {
             val result = reader.decode(binaryBitmap)
             onQrCodeDetected(result)
