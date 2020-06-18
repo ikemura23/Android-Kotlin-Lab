@@ -1,6 +1,9 @@
 package com.ikemura.android_kotlin_lab.camera
 
+import android.annotation.SuppressLint
+import android.graphics.ImageFormat
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.ViewGroup
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -60,11 +64,20 @@ class CameraFragment : Fragment() {
             .build()
         imageAnalysis.setAnalyzer(executor, ImageAnalysis.Analyzer { imageProxy ->
             val rotationDegrees = imageProxy.imageInfo.rotationDegrees
-            // insert your code here
+            analyze(imageProxy, rotationDegrees)
         })
 
         val camera: Camera = cameraProvider.bindToLifecycle(this as LifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+    }
+
+    @SuppressLint("UnsafeExperimentalUsageError")
+    private fun analyze(imageProxy: ImageProxy, rotationDegrees: Int) {
+        imageProxy.image?.let {
+            if (it.format == ImageFormat.YUV_420_888) {
+                Log.d("image_format", "YUV_420_888")
+            }
+        }
     }
 
     companion object {
