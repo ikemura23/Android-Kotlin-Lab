@@ -13,7 +13,6 @@ import com.google.zxing.MultiFormatReader
 import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.Result
 import com.google.zxing.common.HybridBinarizer
-import java.nio.ByteBuffer
 
 class QrCodeAnalyzer(
     private val onQrCodeDetected: (qrCode: Result) -> Unit
@@ -27,27 +26,17 @@ class QrCodeAnalyzer(
         }
     }
 
-    // private fun ByteBuffer.toByteArray(): ByteArray {
-    //     rewind()
-    //     val data = ByteArray(remaining())
-    //     get(data)
-    //     return data
-    // }
-
-
     @SuppressLint("UnsafeExperimentalUsageError")
     override fun analyze(image: ImageProxy) {
-        // if (image.format !in yuvFormats) {
-        //     Log.e("QRCodeAnalyzer", "Expected YUV, now = ${image.format}")
-        //     return
-        // }
-        // val data = image.planes[0].buffer.toByteArray()
+        if (image.format !in yuvFormats) {
+            Log.e("QRCodeAnalyzer", "Expected YUV, now = ${image.format}")
+            return
+        }
 
         val buffer = image.planes[0].buffer
         buffer.rewind()
         val byteArray = ByteArray(buffer.remaining())
         buffer.get(byteArray)
-        // val byteBuffer = buffer.get(data)
 
         val source = PlanarYUVLuminanceSource(
             byteArray,
