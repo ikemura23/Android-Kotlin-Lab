@@ -55,6 +55,7 @@ class QrCodeAnalyzer(
             onQrCodeDetected(result)
         } catch (e: Exception) {
             e.printStackTrace()
+            Log.e("QRCodeAnalyzer", "QRを認識できない")
         } finally {
             // closeしないと追加の画像の生成がブロックされる（analyzeメソッドが呼ばれない）
             image.close()

@@ -1,6 +1,7 @@
 package com.ikemura.android_kotlin_lab.camera
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
@@ -59,6 +60,10 @@ class CameraFragment : Fragment() {
         imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
             Log.d("CameraFragment", result.text)
             showDialog(result.text)
+
+            requireActivity().runOnUiThread {
+                cameraProvider.unbindAll()
+            }
         })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
