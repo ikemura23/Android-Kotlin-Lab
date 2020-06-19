@@ -55,6 +55,9 @@ class QrCodeAnalyzer(
             onQrCodeDetected(result)
         } catch (e: Exception) {
             e.printStackTrace()
+        } finally {
+            // closeしないと追加の画像の生成がブロックされる（analyzeメソッドが呼ばれない）
+            image.close()
         }
     }
 
