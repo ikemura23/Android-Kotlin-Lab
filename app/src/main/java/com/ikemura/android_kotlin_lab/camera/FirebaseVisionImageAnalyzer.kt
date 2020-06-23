@@ -12,7 +12,7 @@ class FirebaseVisionImageAnalyzer : ImageAnalysis.Analyzer {
 
     @androidx.camera.core.ExperimentalGetImage
     override fun analyze(imageProxy: ImageProxy) {
-        Log.d(TAG, "analyze")
+        Log.d(TAG, "analyze start")
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
             // imageオブジェクトと回転値を取得
@@ -28,19 +28,6 @@ class FirebaseVisionImageAnalyzer : ImageAnalysis.Analyzer {
                 .addOnCompleteListener {
                     imageProxy.close()
                 }
-
-            // val byteBuffer = imageProxy.planes[0].buffer
-            // byteBuffer.rewind()
-            // val byteArray = ByteArray(byteBuffer.remaining())
-            // byteBuffer.get(byteArray) // これがないとdecodeエラーになる
-            //
-            // val image = InputImage.fromByteBuffer(
-            //     byteBuffer,
-            //     /* image width */ 480,
-            //     /* image height */ 360,
-            //     inputImage.rotationDegrees,
-            //     InputImage.IMAGE_FORMAT_YUV_420_888 // or IMAGE_FORMAT_YV12
-            // )
         }
     }
 
