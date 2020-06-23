@@ -10,6 +10,7 @@ class FirebaseVisionImageAnalyzer : ImageAnalysis.Analyzer {
     override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image
         if (mediaImage != null) {
+            // imageオブジェクトと回転値を取得
             val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
             // TODO:ここに ML Kit Vision APIのコードをかく
         }
