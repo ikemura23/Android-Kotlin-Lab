@@ -1,8 +1,6 @@
 package com.ikemura.android_kotlin_lab.camera
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
@@ -57,14 +55,16 @@ class CameraFragment : Fragment() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
-            Log.d("CameraFragment", result.text)
-            showDialog(result.text)
+        imageAnalysis.setAnalyzer(executor, FirebaseVisionImageAnalyzer())
 
-            requireActivity().runOnUiThread {
-                cameraProvider.unbindAll()
-            }
-        })
+        // imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
+        //     Log.d("CameraFragment", result.text)
+        //     showDialog(result.text)
+        //
+        //     requireActivity().runOnUiThread {
+        //         cameraProvider.unbindAll()
+        //     }
+        // })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
