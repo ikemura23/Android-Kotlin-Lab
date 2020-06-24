@@ -5,6 +5,7 @@
     >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="false"
@@ -14,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <activity android:name=".SecondActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
