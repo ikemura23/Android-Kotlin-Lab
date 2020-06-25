@@ -1,7 +1,6 @@
 package com.ikemura.android_kotlin_lab.camera
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
