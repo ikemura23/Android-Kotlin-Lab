@@ -16,13 +16,10 @@ import androidx.fragment.app.Fragment
 import com.google.common.util.concurrent.ListenableFuture
 import com.ikemura.android_kotlin_lab.databinding.FragmentCameraBinding
 import kotlinx.android.synthetic.main.fragment_camera.viewFinder
-import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
     private lateinit var binding: FragmentCameraBinding
-    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
-    private lateinit var executor: Executor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +31,11 @@ class CameraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
-        executor = Executors.newSingleThreadExecutor()
+        setupCamera()
+    }
+
+    private fun setupCamera() {
+        val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(Runnable {
             val cameraProvider = cameraProviderFuture.get()
             bindPreview(cameraProvider)
@@ -55,6 +55,8 @@ class CameraFragment : Fragment() {
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
+
+        val executor = Executors.newSingleThreadExecutor()
 
         imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
             Log.d("CameraFragment", result.text)
