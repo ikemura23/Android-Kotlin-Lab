@@ -1,6 +1,8 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.ikemura.android_kotlin_lab.R
