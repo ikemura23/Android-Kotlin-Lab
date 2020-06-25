@@ -67,7 +67,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
     // CameraX core library
-    def camerax_version = '1.0.0-beta05'
+    def camerax_version = '1.0.0-beta06'
     implementation "androidx.camera:camera-core:$camerax_version"
 
     // CameraX Camera2 extensions
@@ -77,7 +77,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
 
     // CameraX View class
-    implementation 'androidx.camera:camera-view:1.0.0-alpha12'
+    implementation 'androidx.camera:camera-view:1.0.0-alpha13'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
