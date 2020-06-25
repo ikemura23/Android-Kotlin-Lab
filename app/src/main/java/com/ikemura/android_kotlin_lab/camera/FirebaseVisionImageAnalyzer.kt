@@ -14,21 +14,22 @@ class FirebaseVisionImageAnalyzer : ImageAnalysis.Analyzer {
     override fun analyze(imageProxy: ImageProxy) {
         Log.d(TAG, "analyze start")
         val mediaImage = imageProxy.image
-        if (mediaImage != null) {
-            // imageオブジェクトと回転値を取得
-            val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-            recognizer.process(inputImage)
-                .addOnSuccessListener {
-                    Log.d(TAG, it.text)
-                }
-                .addOnFailureListener {
-                    Log.e(TAG, it.message)
-                    it.printStackTrace()
-                }
-                .addOnCompleteListener {
-                    imageProxy.close()
-                }
-        }
+        mediaImage ?: return
+
+        // imageオブジェクトと回転値を取得
+        val inputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+        // 文字認識
+        recognizer.process(inputImage)
+            .addOnSuccessListener {
+                Log.d(TAG, it.text)
+            }
+            .addOnFailureListener {
+                Log.e(TAG, it.message)
+                it.printStackTrace()
+            }
+            .addOnCompleteListener {
+                imageProxy.close()
+            }
     }
 
     companion object {

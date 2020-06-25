@@ -57,15 +57,6 @@ class CameraFragment : Fragment() {
 
         imageAnalysis.setAnalyzer(executor, FirebaseVisionImageAnalyzer())
 
-        // imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
-        //     Log.d("CameraFragment", result.text)
-        //     showDialog(result.text)
-        //
-        //     requireActivity().runOnUiThread {
-        //         cameraProvider.unbindAll()
-        //     }
-        // })
-
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
     }
