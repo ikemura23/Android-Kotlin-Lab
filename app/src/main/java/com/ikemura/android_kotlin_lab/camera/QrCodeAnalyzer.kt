@@ -6,18 +6,20 @@ import android.os.Build
 import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.DecodeHintType
-import com.google.zxing.MultiFormatReader
 
 class QrCodeAnalyzer(
     private val onQrCodeDetected: (qrCodeString: String) -> Unit
 ) : ImageAnalysis.Analyzer {
 
     private val yuvFormats = mutableListOf(ImageFormat.YUV_420_888)
-    private val scanner = BarcodeScanning.getClient()
+    private val options = BarcodeScannerOptions.Builder()
+        .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+        .build()
+    private val scanner = BarcodeScanning.getClient(options)
 
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -49,12 +51,5 @@ class QrCodeAnalyzer(
         }.addOnCompleteListener {
             imageProxy.close()
         }
-    }
-
-    private val reader = MultiFormatReader().apply {
-        val map = mapOf(
-            DecodeHintType.POSSIBLE_FORMATS to arrayListOf(BarcodeFormat.QR_CODE)
-        )
-        setHints(map)
     }
 }
