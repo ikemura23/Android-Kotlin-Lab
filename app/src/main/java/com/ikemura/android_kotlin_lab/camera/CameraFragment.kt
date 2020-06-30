@@ -59,8 +59,8 @@ class CameraFragment : Fragment() {
         val executor = Executors.newSingleThreadExecutor()
 
         imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
-            Log.d("CameraFragment", result.text)
-            showDialog(result.text)
+            Log.d("CameraFragment", result)
+            showDialog(result)
 
             requireActivity().runOnUiThread {
                 cameraProvider.unbindAll()
