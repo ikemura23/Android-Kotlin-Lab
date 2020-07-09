@@ -95,6 +95,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
 
+    implementation "com.rmtheis:tess-two:9.0.0"
+    implementation "androidx.exifinterface:exifinterface:1.2.0"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
