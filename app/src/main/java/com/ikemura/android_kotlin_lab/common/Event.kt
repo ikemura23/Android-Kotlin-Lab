@@ -1,4 +1,4 @@
-package com.ikemura.android_kotlin_lab
+package com.ikemura.android_kotlin_lab.common
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.
@@ -20,4 +20,5 @@ open class Event<out T>(private val content: T) {
     fun peekContent(): T = content
 }
 
-fun <T : Any> T.toEvent(): Event<T> = Event(this)
+fun <T : Any> T.toEvent(): Event<T> =
+    Event(this)
