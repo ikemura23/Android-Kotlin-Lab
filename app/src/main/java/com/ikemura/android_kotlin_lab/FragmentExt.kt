@@ -12,6 +12,7 @@ class UserBinding<Binding : ViewDataBinding>(
         shouldExecutePendingBindings: Boolean = false,
         block: UserDataBindingBlock<Binding>
     ) {
+        // bindingがnullなら実行されない
         binding?.let {
             block(it)
             if (shouldExecutePendingBindings) {
