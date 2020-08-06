@@ -1,6 +1,5 @@
 package com.ikemura.android_kotlin_lab.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,28 +24,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
     }
 
-    // override fun onCreateView(
-    //     inflater: LayoutInflater, container: ViewGroup?,
-    //     savedInstanceState: Bundle?
-    // ): View? {
-    //     // binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
-    //     useBinding {
-    //
-    //     }
-    //     return binding.root
-    // }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.load()
-    }
-
-    @SuppressLint("SetTextI18n")
     private fun setupViewModel() {
         // 状態の管理
         viewModel.state.observe(viewLifecycleOwner, Observer<ScreenState> { state ->
