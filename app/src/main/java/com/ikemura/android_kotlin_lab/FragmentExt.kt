@@ -1,9 +1,12 @@
 package com.ikemura.android_kotlin_lab
 
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 
 // bindingという引数を受け取ってUnitを返す変数をtypealiasで宣言している
@@ -29,6 +32,15 @@ class UseBinding<Binding : ViewDataBinding>(
 class UseBindingHelper<T : ViewDataBinding> {
     operator fun getValue(fragment: Fragment, prop: Any?): UseBinding<T> {
         val binding = fragment.view?.setUpBinding(fragment.viewLifecycleOwner)
+        return UseBinding(binding)
+    }
+
+    // Activityで使用する
+    operator fun getValue(fragmentActivity: FragmentActivity, prop: Any?): UseBinding<T> {
+        val binding = (fragmentActivity.findViewById<View>(android.R.id.content) as? ViewGroup)
+            ?.children
+            ?.firstOrNull()
+            ?.setUpBinding(fragmentActivity)
         return UseBinding(binding)
     }
 
