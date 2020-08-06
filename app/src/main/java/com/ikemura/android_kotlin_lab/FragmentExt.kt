@@ -36,3 +36,5 @@ class UserBindingHelper<T : ViewDataBinding> {
         return DataBindingUtil.bind<T>(this)?.also { it.lifecycleOwner = lifecycleOwner }
     }
 }
+
+fun <T : ViewDataBinding> bindings() = UserBindingHelper<T>()
