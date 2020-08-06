@@ -8,5 +8,15 @@ typealias UserDataBindingBlock<Binding> = (binding: Binding) -> Unit
 class UserBinding<Binding : ViewDataBinding>(
     val binding: Binding?
 ) {
-
+    inline operator fun invoke(
+        shouldExecutePendingBindings: Boolean = false,
+        block: UserDataBindingBlock<Binding>
+    ) {
+        binding?.let {
+            block(it)
+            if (shouldExecutePendingBindings) {
+                it.executePendingBindings()
+            }
+        }
+    }
 }
