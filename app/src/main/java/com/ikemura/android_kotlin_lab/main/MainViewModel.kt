@@ -1,7 +1,7 @@
 package com.ikemura.android_kotlin_lab.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ikemura.android_kotlin_lab.common.Event
@@ -15,7 +15,8 @@ class MainViewModel(val repository: ISampleRepository) : ViewModel() {
     private var _state = MutableLiveData<Event<ScreenState>>()
 
     // 外部公開用
-    val state = Transformations.distinctUntilChanged(_state)
+    val state: LiveData<Event<ScreenState>>
+        get() = _state
 
     // データ読み込み
     fun load() {
