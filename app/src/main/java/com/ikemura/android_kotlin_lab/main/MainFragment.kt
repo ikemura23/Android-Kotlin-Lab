@@ -22,27 +22,25 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 viewModel.load()
             }
         }
-        setupViewModel()
+        // ViewModelの設定
+        viewModel.state.observeEvent(this, this::onNavigate)
     }
 
-    private fun setupViewModel() {
-        // 状態の管理
-        viewModel.state.observeEvent(this) { state ->
-            when (state) {
-                is ScreenState.Loading -> {
-                    //ローディング処理
-                    setMessageText("Loading")
-                }
-                is ScreenState.Data -> {
-                    //データ取得
-                    setMessageText("Success: ${state.someData}")
-                    Toast.makeText(context, "Success: ${state.someData}", Toast.LENGTH_SHORT).show()
-                }
-                is ScreenState.Error -> {
-                    //エラー処理
-                    Log.d("MainFragment", "Error")
-                    setMessageText("Error")
-                }
+    private fun onNavigate(state: ScreenState) {
+        when (state) {
+            is ScreenState.Loading -> {
+                //ローディング処理
+                setMessageText("Loading")
+            }
+            is ScreenState.Data -> {
+                //データ取得
+                setMessageText("Success: ${state.someData}")
+                Toast.makeText(context, "Success: ${state.someData}", Toast.LENGTH_SHORT).show()
+            }
+            is ScreenState.Error -> {
+                //エラー処理
+                Log.d("MainFragment", "Error")
+                setMessageText("Error")
             }
         }
     }
