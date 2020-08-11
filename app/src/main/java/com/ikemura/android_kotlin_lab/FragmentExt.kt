@@ -10,16 +10,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 
 // bindingという引数を受け取ってUnitを返す変数をtypealiasで宣言している
-typealias UserDataBindingBlock<Binding> = (binding: Binding) -> Unit
+typealias UseDataBindingBlock<Binding> = (binding: Binding) -> Unit
 
 class UseBinding<Binding : ViewDataBinding>(
     val binding: Binding?
 ) {
     inline operator fun invoke(
         shouldExecutePendingBindings: Boolean = false,
-        block: UserDataBindingBlock<Binding>
+        block: UseDataBindingBlock<Binding>
     ) {
-        // bindingがnullなら実行されない
         binding?.let {
             block(it)
             if (shouldExecutePendingBindings) {
@@ -35,7 +34,6 @@ class UseBindingHelper<T : ViewDataBinding> {
         return UseBinding(binding)
     }
 
-    // Activityで使用する
     operator fun getValue(fragmentActivity: FragmentActivity, prop: Any?): UseBinding<T> {
         val binding = (fragmentActivity.findViewById<View>(android.R.id.content) as? ViewGroup)
             ?.children
