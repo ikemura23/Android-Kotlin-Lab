@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data></data>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ikemura.android_kotlin_lab.main.MainViewModel"
+            />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
