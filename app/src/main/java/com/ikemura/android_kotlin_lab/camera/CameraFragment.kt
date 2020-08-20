@@ -46,24 +46,26 @@ class CameraFragment : Fragment() {
     }
 
     private fun startCamera(cameraProvider: ProcessCameraProvider) {
+        // プレビュー
         val preview: Preview = Preview.Builder()
             .build().also {
                 it.setSurfaceProvider(viewFinder.createSurfaceProvider())
             }
-
+        // カメラ選択
         val cameraSelector: CameraSelector = CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+            .requireLensFacing(CameraSelector.LENS_FACING_BACK) // 背面カメラ
             .build()
         cameraProvider.unbindAll()
 
+        // 画像解析
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
-
         imageAnalysis.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
-            Log.d("CameraFragment", result)
+            // 画像解析の結果を受け取った
             showDialog(result)
+            Log.d("CameraFragment", result)
 
             requireActivity().runOnUiThread {
                 cameraProvider.unbindAll()
