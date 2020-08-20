@@ -47,17 +47,21 @@ class CameraFragment : Fragment() {
     }
 
     private fun startCamera(cameraProvider: ProcessCameraProvider) {
+
         // カメラ選択（背面カメラを使用）
         val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
         // プレビュー
         val preview: Preview = Preview.Builder()
             .build().also {
                 it.setSurfaceProvider(viewFinder.createSurfaceProvider())
             }
+
         // 画像キャプチャ
         val imageCapture = ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .build()
+
         // 画像解析
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(480, 640))
@@ -71,9 +75,11 @@ class CameraFragment : Fragment() {
                     cameraProvider.unbindAll()
                 })
             }
+
         cameraProvider.unbindAll()
         // ライフサイクルにbindする
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
+
     }
 
     override fun onDestroy() {
