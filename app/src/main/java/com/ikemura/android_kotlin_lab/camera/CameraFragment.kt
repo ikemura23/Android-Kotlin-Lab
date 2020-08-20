@@ -59,16 +59,17 @@ class CameraFragment : Fragment() {
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(480, 640))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-            .build()
-        imageAnalysis.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
-            // 画像解析の結果を受け取った
-            showDialog(result)
-            Log.d("CameraFragment", result)
-            // プレビューや画像解析を止めるためにunbind
-            cameraProvider.unbindAll()
-        })
-
-        cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
+            .build().also {
+                it.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
+                    // 画像解析の結果を受け取った
+                    showDialog(result)
+                    Log.d("CameraFragment", result)
+                    // プレビューや画像解析を止めるためにunbind
+                    cameraProvider.unbindAll()
+                })
+            }
+        // ライフサイクルにbindする
+        cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageAnalysis)
     }
 
     override fun onDestroy() {
