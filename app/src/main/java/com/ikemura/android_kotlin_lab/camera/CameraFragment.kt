@@ -57,7 +57,7 @@ class CameraFragment : Fragment() {
 
         // 画像解析
         val imageAnalysis = ImageAnalysis.Builder()
-            .setTargetResolution(Size(720, 1280))
+            .setTargetResolution(Size(480, 640))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
         imageAnalysis.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
