@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -46,15 +47,18 @@ class CameraFragment : Fragment() {
     }
 
     private fun startCamera(cameraProvider: ProcessCameraProvider) {
+        // カメラ選択（背面カメラを使用）
+        val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+        cameraProvider.unbindAll()
         // プレビュー
         val preview: Preview = Preview.Builder()
             .build().also {
                 it.setSurfaceProvider(viewFinder.createSurfaceProvider())
             }
-        // カメラ選択（背面カメラを使用）
-        val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-        cameraProvider.unbindAll()
-
+        // 画像キャプチャ
+        val imageCapture = ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .build()
         // 画像解析
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(480, 640))
@@ -69,7 +73,7 @@ class CameraFragment : Fragment() {
                 })
             }
         // ライフサイクルにbindする
-        cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageAnalysis)
+        cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
 
     override fun onDestroy() {
