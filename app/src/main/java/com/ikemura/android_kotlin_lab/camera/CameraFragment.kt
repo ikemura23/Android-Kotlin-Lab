@@ -51,10 +51,8 @@ class CameraFragment : Fragment() {
             .build().also {
                 it.setSurfaceProvider(viewFinder.createSurfaceProvider())
             }
-        // カメラ選択
-        val cameraSelector: CameraSelector = CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_BACK) // 背面カメラ
-            .build()
+        // カメラ選択（背面カメラを使用）
+        val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
         cameraProvider.unbindAll()
 
         // 画像解析
