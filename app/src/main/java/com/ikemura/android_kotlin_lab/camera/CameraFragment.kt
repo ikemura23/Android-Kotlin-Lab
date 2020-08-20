@@ -40,12 +40,12 @@ class CameraFragment : Fragment() {
         val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(Runnable {
             val cameraProvider = cameraProviderFuture.get()
-            bindPreview(cameraProvider)
+            startCamera(cameraProvider)
         }, ContextCompat.getMainExecutor(requireContext()))
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
-    private fun bindPreview(cameraProvider: ProcessCameraProvider) {
+    private fun startCamera(cameraProvider: ProcessCameraProvider) {
         val preview: Preview = Preview.Builder()
             .build()
 
