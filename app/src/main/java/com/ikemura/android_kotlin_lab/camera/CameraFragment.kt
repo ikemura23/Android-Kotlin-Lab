@@ -47,7 +47,9 @@ class CameraFragment : Fragment() {
 
     private fun startCamera(cameraProvider: ProcessCameraProvider) {
         val preview: Preview = Preview.Builder()
-            .build()
+            .build().also {
+                it.setSurfaceProvider(viewFinder.createSurfaceProvider())
+            }
 
         val cameraSelector: CameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
@@ -69,7 +71,6 @@ class CameraFragment : Fragment() {
         })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
-        preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
     }
 
     override fun onDestroy() {
