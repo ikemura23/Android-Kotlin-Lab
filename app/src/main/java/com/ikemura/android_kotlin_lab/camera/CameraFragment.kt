@@ -16,10 +16,12 @@ import androidx.fragment.app.Fragment
 import com.google.common.util.concurrent.ListenableFuture
 import com.ikemura.android_kotlin_lab.databinding.FragmentCameraBinding
 import kotlinx.android.synthetic.main.fragment_camera.viewFinder
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
     private lateinit var binding: FragmentCameraBinding
+    private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,7 @@ class CameraFragment : Fragment() {
             val cameraProvider = cameraProviderFuture.get()
             bindPreview(cameraProvider)
         }, ContextCompat.getMainExecutor(requireContext()))
+        cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
     private fun bindPreview(cameraProvider: ProcessCameraProvider) {
@@ -56,9 +59,7 @@ class CameraFragment : Fragment() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build()
 
-        val executor = Executors.newSingleThreadExecutor()
-
-        imageAnalysis.setAnalyzer(executor, QrCodeAnalyzer { result ->
+        imageAnalysis.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
             Log.d("CameraFragment", result)
             showDialog(result)
 
@@ -69,6 +70,11 @@ class CameraFragment : Fragment() {
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraExecutor.shutdown()
     }
 
     private fun showDialog(text: String) {
