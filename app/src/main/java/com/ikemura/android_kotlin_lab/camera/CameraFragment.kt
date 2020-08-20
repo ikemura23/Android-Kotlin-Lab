@@ -66,10 +66,8 @@ class CameraFragment : Fragment() {
             // 画像解析の結果を受け取った
             showDialog(result)
             Log.d("CameraFragment", result)
-
-            requireActivity().runOnUiThread {
-                cameraProvider.unbindAll()
-            }
+            // プレビューや画像解析を止めるためにunbind
+            cameraProvider.unbindAll()
         })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
