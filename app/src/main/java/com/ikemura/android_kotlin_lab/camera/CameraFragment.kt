@@ -49,7 +49,6 @@ class CameraFragment : Fragment() {
     private fun startCamera(cameraProvider: ProcessCameraProvider) {
         // カメラ選択（背面カメラを使用）
         val cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-        cameraProvider.unbindAll()
         // プレビュー
         val preview: Preview = Preview.Builder()
             .build().also {
@@ -72,6 +71,7 @@ class CameraFragment : Fragment() {
                     cameraProvider.unbindAll()
                 })
             }
+        cameraProvider.unbindAll()
         // ライフサイクルにbindする
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
     }
