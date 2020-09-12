@@ -1,9 +1,6 @@
 package com.ikemura.android_kotlin_lab.extention
 
 import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.BackgroundColorSpan
-import android.text.style.UnderlineSpan
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -29,7 +26,6 @@ fun TextView.textWithUnderLine2(text: String?) {
     if (text.isNullOrEmpty()) return
     this.text = SpannableStringBuilder().underline {
         append(text)
-        setSpan(UnderlineSpan(), 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }
 
@@ -48,12 +44,6 @@ fun TextView.textWithRedColor(text: String?) {
 @BindingAdapter("textWithRedColor2")
 fun TextView.textWithRedColor2(text: String?) {
     if (text.isNullOrEmpty()) return
-    this.text = SpannableStringBuilder().color(R.color.colorPrimary) {
-        append("ここは")
-        val start = length
-        append(text)
-        val end = length
-        val color = ContextCompat.getColor(this@textWithRedColor2.context, R.color.colorAccent)
-        setSpan(BackgroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    }
+    val color = ContextCompat.getColor(this@textWithRedColor2.context, R.color.colorAccent)
+    this.text = SpannableStringBuilder().color(color) { append(text) }
 }
