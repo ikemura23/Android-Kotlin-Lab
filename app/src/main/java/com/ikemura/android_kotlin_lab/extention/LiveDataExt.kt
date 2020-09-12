@@ -1,4 +1,4 @@
-package com.ikemura.android_kotlin_lab.common.extention
+package com.ikemura.android_kotlin_lab.extention
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
