@@ -72,6 +72,13 @@
                 app:textWithUnderLine2='@{"under line2"}'
                 tools:text="under line2"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:textWithRedColor='@{"color red"}'
+                tools:text="color red2"
+                />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

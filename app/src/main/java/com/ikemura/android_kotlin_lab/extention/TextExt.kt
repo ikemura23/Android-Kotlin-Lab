@@ -28,3 +28,12 @@ fun TextView.textWithUnderLine2(text: String?) {
         setSpan(UnderlineSpan(), 0, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }
+
+/**
+ * TextViewに文字色をつける（HtmlCompat 版）
+ */
+@BindingAdapter("textWithRedColor")
+fun TextView.textWithRedColor(text: String?) {
+    if (text.isNullOrEmpty()) return
+    this.text = HtmlCompat.fromHtml("ここは<font color='red'>$text</font>", HtmlCompat.FROM_HTML_MODE_COMPACT)
+}
