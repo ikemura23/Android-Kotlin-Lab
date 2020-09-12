@@ -1,18 +1,14 @@
 package com.ikemura.android_kotlin_lab.camera
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -20,9 +16,6 @@ import androidx.fragment.app.Fragment
 import com.google.common.util.concurrent.ListenableFuture
 import com.ikemura.android_kotlin_lab.databinding.FragmentCameraBinding
 import kotlinx.android.synthetic.main.fragment_camera.viewFinder
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -64,30 +57,34 @@ class CameraFragment : Fragment() {
             }
 
         // 画像キャプチャ
-        val imageCapture = ImageCapture.Builder()
+        val imageCapture: ImageCapture = ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
             .build().also {
-                // it.takePicture() TODO: 指定したパスに画像を保存するコードを実装
+                // it.takePicture() TODO: 指定したパスと画像を保存するコードを実装
             }
 
         // 画像解析
-        val imageAnalysis = ImageAnalysis.Builder()
+        val imageAnalysis: ImageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(480, 640))
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .build().also {
-                it.setAnalyzer(cameraExecutor, QrCodeAnalyzer { result ->
+                it.setAnalyzer(cameraExecutor, QrCodeAnalyzer { resultString ->
                     // 画像解析の結果を受け取った
-                    showDialog(result)
-                    Log.d("CameraFragment", result)
+                    showDialog(resultString)
                     // プレビューや画像解析を止めるためにunbind
                     cameraProvider.unbindAll()
                 })
             }
-
+        // bindする前にuseCaseを全て開放する
         cameraProvider.unbindAll()
         // ライフサイクルにbindする
-        cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview, imageCapture, imageAnalysis)
-
+        cameraProvider.bindToLifecycle(
+            viewLifecycleOwner,
+            cameraSelector,
+            preview,
+            imageCapture,
+            imageAnalysis
+        )
     }
 
     override fun onDestroy() {
