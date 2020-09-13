@@ -88,6 +88,15 @@
                 app:textWithRedColor2='@{"color"}'
                 tools:text="color"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColor="#ffffffff"
+                app:textWitBackgroundColor='@{"background color"}'
+                tools:text="color"
+                />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
