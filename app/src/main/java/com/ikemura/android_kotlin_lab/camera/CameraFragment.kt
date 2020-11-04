@@ -68,7 +68,7 @@ class CameraFragment : Fragment() {
         })
 
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
-        preview.setSurfaceProvider(viewFinder.createSurfaceProvider())
+        preview.setSurfaceProvider(viewFinder.surfaceProvider)
     }
 
     private fun showDialog(text: String) {
