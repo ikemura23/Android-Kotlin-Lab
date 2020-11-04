@@ -2,7 +2,6 @@ package com.ikemura.android_kotlin_lab.camera
 
 import android.os.Bundle
 import android.util.Log
-import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,7 +50,7 @@ class CameraFragment : Fragment() {
         //     .build()
 
         val imageAnalysis = ImageAnalysis.Builder()
-            .setTargetResolution(Size(1280, 720))
+            // .setTargetResolution(Size(1280, 720)) // デフォルトは 640x480になってるので指定不要 https://developer.android.com/training/camerax/configuration?hl=ja
             // .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST) // デフォルトは STRATEGY_KEEP_ONLY_LATEST なので不要
             .build()
 
