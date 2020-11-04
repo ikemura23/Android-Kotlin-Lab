@@ -49,7 +49,6 @@ class CameraFragment : Fragment() {
         val cameraSelector: CameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
             .build()
-        cameraProvider.unbindAll()
 
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
@@ -67,6 +66,7 @@ class CameraFragment : Fragment() {
             }
         })
 
+        cameraProvider.unbindAll()
         cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(viewFinder.surfaceProvider)
     }
