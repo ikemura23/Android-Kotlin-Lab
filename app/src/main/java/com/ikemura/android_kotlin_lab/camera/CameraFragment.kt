@@ -52,7 +52,7 @@ class CameraFragment : Fragment() {
 
         val imageAnalysis = ImageAnalysis.Builder()
             .setTargetResolution(Size(1280, 720))
-            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            // .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST) // デフォルトは STRATEGY_KEEP_ONLY_LATEST なので不要
             .build()
 
         val executor = Executors.newSingleThreadExecutor()
