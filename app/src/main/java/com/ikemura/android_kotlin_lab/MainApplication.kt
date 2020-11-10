@@ -4,9 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class MainApplication : Application()
-// , CameraXConfig.Provider
-{
+class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
@@ -15,8 +13,4 @@ class MainApplication : Application()
             modules(appModule)
         }
     }
-
-    // override fun getCameraXConfig(): CameraXConfig {
-    //     return Camera2Config.defaultConfig()
-    // }
 }
