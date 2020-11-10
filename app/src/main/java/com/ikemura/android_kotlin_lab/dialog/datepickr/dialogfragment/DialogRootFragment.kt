@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.FragmentDialogRootBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * ダイアログ系を表示するルート画面
@@ -26,9 +29,23 @@ class DialogRootFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         useBinding {
             it.datePicker.setOnClickListener {
-                // TODO: Date Picker表示
+                showDatePicker()
             }
         }
+    }
+
+    /**
+     * Date Picker表示
+     */
+    private fun showDatePicker() {
+        MaterialDatePicker.Builder.datePicker().build().apply {
+            // OKクリック
+            addOnPositiveButtonClickListener { datetime ->
+                useBinding {
+                    it.dateText.text = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(datetime)
+                }
+            }
+        }.show(childFragmentManager, "DatePicker")
     }
 
     companion object {
