@@ -1,5 +1,6 @@
 package com.ikemura.android_kotlin_lab.dialog.datepickr.dialogfragment
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,9 @@ class DialogRootFragment : Fragment() {
             it.datePicker.setOnClickListener {
                 showDatePicker()
             }
+            it.oldDatePicker.setOnClickListener {
+                showOldDatePicker()
+            }
         }
     }
 
@@ -46,6 +50,20 @@ class DialogRootFragment : Fragment() {
                 }
             }
         }.show(childFragmentManager, "DatePicker")
+    }
+
+    private fun showOldDatePicker() {
+        DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                useBinding {
+                    it.dateText.text = "$year/$month/$dayOfMonth"
+                }
+            },
+            2012, // 仮の値
+            11, // 仮の値
+            5 // 仮の値
+        ).show()
     }
 
     companion object {
