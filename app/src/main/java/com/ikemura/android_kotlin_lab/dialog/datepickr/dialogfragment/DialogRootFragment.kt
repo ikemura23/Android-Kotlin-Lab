@@ -10,6 +10,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.FragmentDialogRootBinding
+import com.ikemura.android_kotlin_lab.repository.DummyRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -18,11 +19,14 @@ import java.util.Locale
  */
 class DialogRootFragment : Fragment() {
     private val useBinding by bindings<FragmentDialogRootBinding>()
-
+    private lateinit var dialogRootViewModel: DialogRootViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val repository = DummyRepository()
+        dialogRootViewModel = DialogRootViewModel(repository)
+        println(dialogRootViewModel.getPageData())
         return inflater.inflate(R.layout.fragment_dialog_root, container, false)
     }
 

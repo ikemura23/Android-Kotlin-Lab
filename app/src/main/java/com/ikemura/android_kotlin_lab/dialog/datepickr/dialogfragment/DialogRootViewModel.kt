@@ -1,9 +1,10 @@
-package com.ikemura.android_kotlin_lab.tab
+package com.ikemura.android_kotlin_lab.dialog.datepickr.dialogfragment
 
 import androidx.lifecycle.ViewModel
 import com.ikemura.android_kotlin_lab.repository.DummyRepository
 
-class PagerViewModel(
+class DialogRootViewModel(
     private val dummyRepository: DummyRepository
 ) : ViewModel() {
+    fun getPageData() = dummyRepository.getDummy()
 }
