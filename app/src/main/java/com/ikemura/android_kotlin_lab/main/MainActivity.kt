@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFragment() {
         supportFragmentManager.commit(false) {
-            replace(R.id.container, DialogRootFragment.newInstance())
+            replace(R.id.container, MainFragment.newInstance())
         }
     }
 }
