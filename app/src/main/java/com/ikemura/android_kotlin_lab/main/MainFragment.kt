@@ -1,10 +1,12 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
@@ -19,8 +21,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
         useBinding.invoke {
             it.button.setOnClickListener {
-                viewModel.load()
-                // startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
+                // viewModel.load()
+
+                // ライセンス画面に遷移する
+                startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
             }
         }
         // ViewModelの設定
