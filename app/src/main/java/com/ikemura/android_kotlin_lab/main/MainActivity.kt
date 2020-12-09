@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.ikemura.android_kotlin_lab.R
-import com.ikemura.android_kotlin_lab.camera.CameraFragment
 import com.ikemura.android_kotlin_lab.dialog.datepickr.dialogfragment.DialogRootFragment
 
 class MainActivity : AppCompatActivity() {

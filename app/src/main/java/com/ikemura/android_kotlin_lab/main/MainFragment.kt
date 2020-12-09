@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
-import com.ikemura.android_kotlin_lab.extention.observeEvent
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
+import com.ikemura.android_kotlin_lab.extention.observeEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {
