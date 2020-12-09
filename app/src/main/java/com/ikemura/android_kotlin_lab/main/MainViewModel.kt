@@ -10,11 +10,9 @@ import com.ikemura.android_kotlin_lab.repository.ISampleRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(val repository: ISampleRepository) : ViewModel() {
-    // 状態（viewModel専用）
-    private var _state = MutableLiveData<Event<ScreenState>>()
+class MainViewModel(private val repository: ISampleRepository) : ViewModel() {
 
-    // 外部公開用
+    private var _state = MutableLiveData<Event<ScreenState>>()
     val state: LiveData<Event<ScreenState>>
         get() = _state
 
