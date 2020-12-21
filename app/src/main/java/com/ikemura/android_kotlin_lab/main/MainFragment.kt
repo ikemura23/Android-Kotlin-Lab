@@ -18,6 +18,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val subLauncher = registerForActivityResult(SubActivity.SubActivityResultContract()) {
         it?.run { setMessageText(it) }
     }
+    private val subSealedLauncher = registerForActivityResult(SubActivity.SubActivitySealedResultContract()) { out ->
+        when (out) {
+            is SubActivity.SubActivitySealedResultContract.Out.hoge -> setMessageText("hoge")
+            is SubActivity.SubActivitySealedResultContract.Out.fuga -> setMessageText(out.str)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +40,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private fun navigateSubActivity() {
-        subLauncher.launch(Unit)
+        // subLauncher.launch(Unit)
+        subSealedLauncher.launch(SubActivity.SubActivitySealedResultContract.InputMyType.Type2)
     }
 
     private fun onNavigate(state: ScreenState) {
