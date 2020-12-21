@@ -58,7 +58,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun setMessageText(state: String) {
         Log.d("MainFragment", state)
-        // binding.message.text = state
+        useBinding {
+            it.message.text = state
+        }
     }
 
     companion object {
