@@ -1,6 +1,5 @@
 package com.ikemura.android_kotlin_lab.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment(R.layout.main_fragment) {
     private val viewModel: MainViewModel by viewModel()
     private val useBinding by bindings<MainFragmentBinding>()
+    private val subLauncher = registerForActivityResult(SubActivity.SubActivityResultContract()) {
+        it?.run { setMessageText(it) }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +34,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private fun navigateSubActivity() {
-        startActivity(Intent(requireContext(), SubActivity::class.java))
+        subLauncher.launch(Unit)
     }
 
     private fun onNavigate(state: ScreenState) {

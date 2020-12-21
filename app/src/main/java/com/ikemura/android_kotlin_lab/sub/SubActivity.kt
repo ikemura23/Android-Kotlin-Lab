@@ -15,7 +15,7 @@ class SubActivity : AppCompatActivity(R.layout.activity_sub) {
 
     class SubActivityResultContract : ActivityResultContract<Unit, String?>() {
         override fun createIntent(context: Context, input: Unit?): Intent {
-            return createIntent(context, input)
+            return Intent(context, SubActivity::class.java)
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?): String? {
