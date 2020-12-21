@@ -18,7 +18,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val subLauncher = registerForActivityResult(SubActivity.SubActivityResultContract()) {
         it?.run { setMessageText(it) }
     }
-    private val subSealedLauncher = registerForActivityResult(SubActivity.SubActivitySealedResultContract()) { out ->
+    private val subSealedLauncher = registerForActivityResult(SubActivity.SubActivitySealedResultContract(), this::bindResult)
+    private fun bindResult(out: SubActivity.SubActivitySealedResultContract.Out) {
         when (out) {
             is SubActivity.SubActivitySealedResultContract.Out.hoge -> setMessageText("hoge")
             is SubActivity.SubActivitySealedResultContract.Out.fuga -> setMessageText(out.str)
