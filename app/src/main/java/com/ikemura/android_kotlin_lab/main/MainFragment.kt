@@ -1,5 +1,6 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 import com.ikemura.android_kotlin_lab.extention.observeEvent
+import com.ikemura.android_kotlin_lab.sub.SubActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {
@@ -18,12 +20,19 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         useBinding.invoke {
-            it.button.setOnClickListener {
+            it.stateButton.setOnClickListener {
                 viewModel.load()
+            }
+            it.activityButton.setOnClickListener {
+                navigateSubActivity()
             }
         }
         // ViewModelの設定
         viewModel.state.observeEvent(this, this::onNavigate)
+    }
+
+    private fun navigateSubActivity() {
+        startActivity(Intent(requireContext(), SubActivity::class.java))
     }
 
     private fun onNavigate(state: ScreenState) {
