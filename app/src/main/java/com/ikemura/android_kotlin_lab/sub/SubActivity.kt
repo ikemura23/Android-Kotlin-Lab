@@ -18,12 +18,12 @@ class SubActivity : AppCompatActivity(R.layout.activity_sub) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         useBinding {
-            it.button.setOnClickListener {
-                setResult(RESULT_OK, Intent().apply {
-                    putExtra("RESULT", "SubActivity result 999")
-                })
-                finish()
-            }
+            // it.button.setOnClickListener {
+            //     setResult(RESULT_OK, Intent().apply {
+            //         putExtra("RESULT", "SubActivity result 999")
+            //     })
+            //     finish()
+            // }
             it.button2.setOnClickListener {
                 val type = intent.getSerializableExtra("myInputKey") as SubActivitySealedResultContract.InputMyType
                 val result = when (type) {
