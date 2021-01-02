@@ -1,5 +1,6 @@
 package com.ikemura.android_kotlin_lab.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
+import com.ikemura.android_kotlin_lab.camera.CameraActivity
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
 import com.ikemura.android_kotlin_lab.extention.observeEvent
 import com.ikemura.android_kotlin_lab.sub.SubActivity
@@ -35,6 +37,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             it.activityButton.setOnClickListener {
                 navigateSubActivity()
             }
+            it.cameraButton.setOnClickListener {
+                navigateCamera()
+            }
         }
         // ViewModelの設定
         viewModel.state.observeEvent(this, this::onNavigate)
@@ -43,6 +48,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private fun navigateSubActivity() {
         // subLauncher.launch(Unit)
         subSealedLauncher.launch(SubActivity.SubActivitySealedResultContract.InputMyType.Type2)
+    }
+
+    private fun navigateCamera() {
+        startActivity(Intent(requireContext(), CameraActivity::class.java))
     }
 
     private fun onNavigate(state: ScreenState) {

@@ -16,10 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <activity android:name=".camera.CameraActivity" />
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr"
             />
+
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
