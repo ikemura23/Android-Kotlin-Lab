@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.camera.CameraActivity
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
+import com.ikemura.android_kotlin_lab.databinding.PagerFragmentBinding
 import com.ikemura.android_kotlin_lab.extention.observeEvent
 import com.ikemura.android_kotlin_lab.sub.SubActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +41,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
             it.cameraButton.setOnClickListener {
                 navigateCamera()
+            }
+            it.cameraButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionCamera())
+            }
+            it.tabButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToPagerFragment())
             }
         }
         // ViewModelの設定
