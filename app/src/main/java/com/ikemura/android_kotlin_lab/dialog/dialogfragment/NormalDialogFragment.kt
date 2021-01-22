@@ -9,12 +9,19 @@ import androidx.fragment.app.DialogFragment
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.NormalDialogFragmentBinding
 
-class NormalDialogFragment : DialogFragment(R.layout.normal_dialog_fragment) {
+/**
+ * カスタムレイアウトを使用したDialogFragmentのサンプル
+ *
+ * 以下の書き方で、コストラクタにレイアウトidを渡すと、DataBindingを返さなくてもレイアウトは表示できる。
+ * class NormalDialogFragment : DialogFragment(R.layout.normal_dialog_fragment) {
+ */
+class NormalDialogFragment : DialogFragment() {
 
     private lateinit var binding: NormalDialogFragmentBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(

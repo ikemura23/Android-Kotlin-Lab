@@ -83,16 +83,27 @@
                 android:id="@+id/action_dialogRootFragment_to_alertDialogFragment"
                 app:destination="@id/alertDialogFragment"
                 />
+            <action
+                android:id="@+id/action_dialogRootFragment_to_transportDialogFragment"
+                app:destination="@id/transportDialogFragment"
+                />
         </fragment>
         <dialog
             android:id="@+id/normalDialogFragment"
             android:name="com.ikemura.android_kotlin_lab.dialog.dialogfragment.NormalDialogFragment"
             android:label="NormalDialogFragment"
+            tools:layout="@layout/normal_dialog_fragment"
             />
         <dialog
             android:id="@+id/alertDialogFragment"
             android:name="com.ikemura.android_kotlin_lab.dialog.dialogfragment.AlertDialogFragment"
             android:label="AlertDialogFragment"
+            />
+        <dialog
+            android:id="@+id/transportDialogFragment"
+            android:name="com.ikemura.android_kotlin_lab.dialog.dialogfragment.TransportDialogFragment"
+            android:label="TransportDialogFragment"
+            tools:layout="@layout/normal_dialog_fragment"
             />
     </navigation>
 

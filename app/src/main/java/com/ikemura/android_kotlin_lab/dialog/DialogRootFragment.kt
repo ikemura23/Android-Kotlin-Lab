@@ -46,6 +46,9 @@ class DialogRootFragment : Fragment() {
             it.alertDialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToAlertDialogFragment())
             }
+            it.transportDialog.setOnClickListener {
+                findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToTransportDialogFragment())
+            }
         }
     }
 

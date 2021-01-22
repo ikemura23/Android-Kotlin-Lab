@@ -5,7 +5,11 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
+/**
+ * アラートダイアログのサンプル
+ */
 class AlertDialogFragment : DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
             .setMessage("メッセージ")
@@ -15,12 +19,12 @@ class AlertDialogFragment : DialogFragment() {
     }
 
     private fun clickPositive() {
-        // なにの処理
+        // なにかの処理
         dismiss()
     }
 
     private fun clickNegative() {
-        // なにの処理
+        // なにかの処理
         dismiss()
     }
 }

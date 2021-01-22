@@ -18,9 +18,11 @@
             android:background="@color/cardview_light_background"
             android:text="hello dialog"
             android:layout_margin="16dp"
+            android:textSize="30sp"
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             />
 
     </FrameLayout>

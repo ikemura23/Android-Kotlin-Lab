@@ -43,11 +43,19 @@
             android:layout_height="wrap_content"
             android:text="Normal Dialog"
             />
+
         <Button
             android:id="@+id/alert_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alert Dialog"
+            />
+
+        <Button
+            android:id="@+id/transport_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transport Dialog"
             />
     </LinearLayout>
 </layout>
