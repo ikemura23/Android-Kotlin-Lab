@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.ActivitySubBinding
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class SubActivity : AppCompatActivity(R.layout.activity_sub) {
     private val useBinding by bindings<ActivitySubBinding>()
