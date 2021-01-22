@@ -10,13 +10,13 @@ import com.ikemura.android_kotlin_lab.R
  */
 class TransportDialogFragment2 : DialogFragment(R.layout.transparent_dialog_fragment) {
 
-    // ダイアログの黒背景を消して透明にする
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
-        setStyle(STYLE_NORMAL, R.style.TransportDialog) // スタイルで設定する場合
+        // スタイルで暗い背景を消す
+        setStyle(STYLE_NORMAL, R.style.TransportDialog)
 
         return super.onCreateDialog(savedInstanceState).apply {
-            // window?.setDimAmount(0f) // コードで暗い背景を消す
+            // コードで暗い背景を消す https://stackoverflow.com/a/54166609
+            // window?.setDimAmount(0f)
         }
     }
 }
