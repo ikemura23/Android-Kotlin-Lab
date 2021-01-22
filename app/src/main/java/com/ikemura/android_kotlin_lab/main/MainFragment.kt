@@ -11,7 +11,6 @@ import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.camera.CameraActivity
 import com.ikemura.android_kotlin_lab.databinding.MainFragmentBinding
-import com.ikemura.android_kotlin_lab.databinding.PagerFragmentBinding
 import com.ikemura.android_kotlin_lab.extention.observeEvent
 import com.ikemura.android_kotlin_lab.sub.SubActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,6 +46,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             }
             it.tabButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToPagerFragment())
+            }
+            it.dialogButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToDialogRootFragment())
             }
         }
         // ViewModelの設定
