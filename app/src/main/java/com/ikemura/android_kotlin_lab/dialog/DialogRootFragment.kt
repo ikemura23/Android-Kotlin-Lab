@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.ikemura.android_kotlin_lab.R
-import com.ikemura.android_kotlin_lab.bindings
 import com.ikemura.android_kotlin_lab.databinding.FragmentDialogRootBinding
 import com.ikemura.android_kotlin_lab.di.ViewModelInjector.dialogRootViewModel
+import com.ikemura.android_kotlin_lab.extention.viewBinding
 import com.ikemura.android_kotlin_lab.repository.DummyRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -20,7 +20,7 @@ import java.util.Locale
  * ダイアログ系を表示するルート画面
  */
 class DialogRootFragment : Fragment() {
-    private val useBinding by bindings<FragmentDialogRootBinding>()
+    private val binding by viewBinding<FragmentDialogRootBinding>()
     private val viewModel: DialogRootViewModel = dialogRootViewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,23 +33,23 @@ class DialogRootFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        useBinding {
-            it.datePicker.setOnClickListener {
+        with(binding) {
+            datePicker.setOnClickListener {
                 showDatePicker()
             }
-            it.oldDatePicker.setOnClickListener {
+            oldDatePicker.setOnClickListener {
                 showOldDatePicker()
             }
-            it.normalDialog.setOnClickListener {
+            normalDialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionNormalDialogFragment())
             }
-            it.alertDialog.setOnClickListener {
+            alertDialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToAlertDialogFragment())
             }
-            it.transportDialog.setOnClickListener {
+            transportDialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToTransportDialogFragment())
             }
-            it.transport2Dialog.setOnClickListener {
+            transport2Dialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToTransportDialogFragment2())
             }
         }
@@ -62,9 +62,7 @@ class DialogRootFragment : Fragment() {
         MaterialDatePicker.Builder.datePicker().build().apply {
             // OKクリック
             addOnPositiveButtonClickListener { datetime ->
-                useBinding {
-                    it.dateText.text = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(datetime)
-                }
+                binding.dateText.text = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(datetime)
             }
         }.show(childFragmentManager, "DatePicker")
     }
@@ -73,9 +71,7 @@ class DialogRootFragment : Fragment() {
         DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
-                useBinding {
-                    it.dateText.text = "$year/$month/$dayOfMonth"
-                }
+                binding.dateText.text = "$year/$month/$dayOfMonth"
             },
             2012, // 仮の値
             11, // 仮の値
