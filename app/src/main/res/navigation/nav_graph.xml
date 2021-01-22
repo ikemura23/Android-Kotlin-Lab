@@ -87,6 +87,10 @@
                 android:id="@+id/action_dialogRootFragment_to_transportDialogFragment"
                 app:destination="@id/transportDialogFragment"
                 />
+            <action
+                android:id="@+id/action_dialogRootFragment_to_transportDialogFragment2"
+                app:destination="@id/transportDialogFragment2"
+                />
         </fragment>
         <dialog
             android:id="@+id/normalDialogFragment"
@@ -104,6 +108,11 @@
             android:name="com.ikemura.android_kotlin_lab.dialog.dialogfragment.TransportDialogFragment"
             android:label="TransportDialogFragment"
             tools:layout="@layout/normal_dialog_fragment"
+            />
+        <dialog
+            android:id="@+id/transportDialogFragment2"
+            android:name="com.ikemura.android_kotlin_lab.dialog.dialogfragment.TransportDialogFragment2"
+            android:label="TransportDialogFragment2"
             />
     </navigation>
 
