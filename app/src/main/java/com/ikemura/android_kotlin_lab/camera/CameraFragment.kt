@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.common.util.concurrent.ListenableFuture
 import com.ikemura.android_kotlin_lab.databinding.FragmentCameraBinding
-import kotlinx.android.synthetic.main.fragment_camera.viewFinder
 import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
@@ -67,7 +66,7 @@ class CameraFragment : Fragment() {
 
         cameraProvider.unbindAll()
         cameraProvider.bindToLifecycle(viewLifecycleOwner, CameraSelector.DEFAULT_BACK_CAMERA, imageAnalysis, preview)
-        preview.setSurfaceProvider(viewFinder.surfaceProvider)
+        preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
     }
 
     private fun showDialog(text: String) {

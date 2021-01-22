@@ -1,16 +1,13 @@
 package com.ikemura.android_kotlin_lab.list
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.ikemura.android_kotlin_lab.R
-
 import com.ikemura.android_kotlin_lab.list.ItemFragment.OnListFragmentInteractionListener
 import com.ikemura.android_kotlin_lab.list.dummy.DummyContent.DummyItem
-
-import kotlinx.android.synthetic.main.fragment_item.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -19,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_item.view.*
  */
 class MyItemRecyclerViewAdapter(
     private val mValues: List<DummyItem>,
-    private val mListener: OnListFragmentInteractionListener?)
-    : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+    private val mListener: OnListFragmentInteractionListener?
+) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
@@ -35,7 +32,7 @@ class MyItemRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_item, parent, false)
+            .inflate(R.layout.fragment_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -53,8 +50,8 @@ class MyItemRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mIdView: TextView = mView.findViewById(R.id.item_number)
+        val mContentView: TextView = mView.findViewById(R.id.content)
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
