@@ -1,9 +1,9 @@
 package com.ikemura.android_kotlin_lab.dialog.dialogfragment
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * アラートダイアログのサンプル
@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 class AlertDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext())
+        return MaterialAlertDialogBuilder(requireContext())
             .setMessage("メッセージ")
             .setPositiveButton("OK") { _, _ -> clickPositive() }
             .setNegativeButton("Cancel") { _, _ -> clickNegative() }
