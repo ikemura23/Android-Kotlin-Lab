@@ -50,6 +50,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             it.dialogButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToDialogRootFragment())
             }
+            it.locationButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationFragment())
+            }
         }
         // ViewModelの設定
         viewModel.state.observeEvent(this, this::onNavigate)
