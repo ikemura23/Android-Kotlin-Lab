@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.CalendarConstraints.DateValidator
+import com.google.android.material.datepicker.CompositeDateValidator
+import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.FragmentDialogRootBinding
@@ -14,6 +19,7 @@ import com.ikemura.android_kotlin_lab.di.ViewModelInjector.dialogRootViewModel
 import com.ikemura.android_kotlin_lab.extention.viewBinding
 import com.ikemura.android_kotlin_lab.repository.DummyRepository
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 /**
@@ -59,7 +65,23 @@ class DialogRootFragment : Fragment() {
      * Date Picker表示
      */
     private fun showDatePicker() {
-        MaterialDatePicker.Builder.datePicker().build().apply {
+        MaterialDatePicker.Builder.datePicker().apply {
+
+            // 開始日を制限したいなら DateValidatorPointForward を使う
+            // val dateValidatorMin = DateValidatorPointForward.from(指定日)
+
+            // 未来を選択させない制限
+            val dateValidatorMax = DateValidatorPointBackward.before(Date().time)
+            // 制限Listを作成
+            val validators: List<DateValidator> = listOf(dateValidatorMax)
+            val dateValidator: DateValidator = CompositeDateValidator.allOf(validators)
+            // CalendarConstraintsを作成
+            val constraints: CalendarConstraints = CalendarConstraints.Builder()
+                .setValidator(dateValidator) // 制限をセット
+                .build()
+            setCalendarConstraints(constraints)
+
+        }.build().apply {
             // OKクリック
             addOnPositiveButtonClickListener { datetime ->
                 binding.dateText.text = SimpleDateFormat("yyyy/MM/dd", Locale.JAPAN).format(datetime)
