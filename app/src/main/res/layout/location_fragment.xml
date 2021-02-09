@@ -7,13 +7,23 @@
     >
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/ACCESS_FINE_LOCATION"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="位置情報Permissionを取得"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="ACCESS_FINE_LOCATION"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ACCESS_BACKGROUND_LOCATION"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCESS_BACKGROUND_LOCATION"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ACCESS_FINE_LOCATION"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
