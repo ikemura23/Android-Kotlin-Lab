@@ -40,7 +40,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             showRequestPermissionRationale()
             checkLocationPermission()
         }
-    private val asPermissions =
+    private val askPermissions =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
             if (result) {
                 Log.d(TAG, "$result")
@@ -55,16 +55,20 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkLocationPermission()
 
         // 位置情報Permissionのリクエスト
         binding.ACCESSFINELOCATION.setOnClickListener {
             // requestPermissionLauncher.launch(permissions)
-            asPermissions.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            askPermissions.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         binding.ACCESSBACKGROUNDLOCATION.setOnClickListener {
-            asPermissions.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            askPermissions.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkLocationPermission()
     }
 
     /**
