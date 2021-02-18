@@ -62,7 +62,14 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
             askPermissions.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         binding.ACCESSBACKGROUNDLOCATION.setOnClickListener {
-            askPermissions.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            // askPermissions.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION) // <= これはうごかない
+            requestPermissionLauncher.launch(permissions)
+        }
+        binding.permissionRationale.setOnClickListener {
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
         }
     }
 
@@ -75,25 +82,10 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
      * 権限をチェックする
      */
     private fun checkLocationPermission() {
-
         permissions.forEach {
             val permissionResult = ContextCompat.checkSelfPermission(requireActivity(), it) == PackageManager.PERMISSION_GRANTED
             Log.d(TAG, "$it: $permissionResult")
         }
-        // when {
-        //     permissions.all {
-        //         ContextCompat.checkSelfPermission(requireActivity(), it) == PackageManager.PERMISSION_GRANTED
-        //     } -> {
-        //         // すべて許可済み
-        //         Log.d(TAG, "すべて許可済み")
-        //     }
-        //     // ユーザーに許諾説明が出来る
-        //     permissions.any {
-        //         ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), it)
-        //     } -> {
-        //
-        //     }
-        // }
     }
 
     private fun showRequestPermissionRationale() {
