@@ -23,6 +23,7 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     private lateinit var binding: LocationFragmentBinding
 
     private val permissions =
+        // Android 10から ACCESS_BACKGROUND_LOCATION が追加された
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -33,14 +34,16 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
 
-    private val requestPermissionLauncher =
+    // 複数
+    private val requestMultiPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             // 権限が許可されたか？
             Log.d(TAG, map.toString())
-            showRequestPermissionRationale()
             checkLocationPermission()
         }
-    private val askPermissions =
+
+    // 単体
+    private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
             if (result) {
                 Log.d(TAG, "$result")
@@ -55,21 +58,17 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // 位置情報Permissionのリクエスト
-        binding.ACCESSFINELOCATION.setOnClickListener {
-            // requestPermissionLauncher.launch(permissions)
-            askPermissions.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-        binding.ACCESSBACKGROUNDLOCATION.setOnClickListener {
-            // askPermissions.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION) // <= これはうごかない
-            requestPermissionLauncher.launch(permissions)
-        }
-        binding.permissionRationale.setOnClickListener {
-            ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            )
+        with(binding) {
+            // 位置情報Permissionのリクエスト
+            fg.setOnClickListener {
+                requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            bg.setOnClickListener {
+                requestPermission.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            }
+            all.setOnClickListener {
+                requestMultiPermissions.launch(permissions)
+            }
         }
     }
 
@@ -88,6 +87,9 @@ class LocationFragment : Fragment(R.layout.location_fragment) {
         }
     }
 
+    /**
+     * 許可ダイアログの再表示判定（永続的に不許可設定の場合、falseが返却される）
+     */
     private fun showRequestPermissionRationale() {
         permissions.forEach {
             ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), it)

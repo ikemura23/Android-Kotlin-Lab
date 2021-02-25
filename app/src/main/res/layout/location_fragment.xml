@@ -7,11 +7,11 @@
     >
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/ACCESS_FINE_LOCATION"
+        android:id="@+id/fg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ACCESS_FINE_LOCATION"
-        app:layout_constraintBottom_toTopOf="@+id/permission_rationale"
+        android:text="フォアグラウンド\nACCESS_FINE_LOCATION"
+        app:layout_constraintBottom_toTopOf="@+id/bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,26 +19,27 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/ACCESS_BACKGROUND_LOCATION"
+        android:id="@+id/bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ACCESS_BACKGROUND_LOCATION"
-        app:layout_constraintBottom_toTopOf="@+id/permission_rationale"
+        android:text="バックグラウンド\nACCESS_BACKGROUND_LOCATION"
+        app:layout_constraintBottom_toTopOf="@+id/all"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ACCESS_FINE_LOCATION"
+        app:layout_constraintTop_toBottomOf="@+id/fg"
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/permission_rationale"
+        android:id="@+id/all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="permission_rationale"
+        android:text="両方"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ACCESS_FINE_LOCATION"
+        app:layout_constraintTop_toBottomOf="@+id/bg"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
