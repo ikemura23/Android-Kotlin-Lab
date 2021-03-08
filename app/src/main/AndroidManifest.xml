@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    package="com.ikemura.android_kotlin_lab"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ikemura.android_kotlin_lab"
     >
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />  <!-- バックグラウンドでの位置情報 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- フォアグラウンドでの位置情報 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- バックグラウンドでの位置情報 -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:name=".MainApplication"
@@ -23,6 +25,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${mapsApiKey}"
+            />
+
         <activity android:name=".camera.CameraActivity" />
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

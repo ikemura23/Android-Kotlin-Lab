@@ -53,6 +53,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             it.locationButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationFragment())
             }
+            it.map.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToMapsFragment())
+            }
             it.detectMockLocationButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetectMockLocationFragment())
             }

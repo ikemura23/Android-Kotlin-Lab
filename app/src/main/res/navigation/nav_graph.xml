@@ -41,6 +41,10 @@
             android:id="@+id/action_mainFragment_to_detectMockLocationFragment"
             app:destination="@id/detectMockLocationFragment"
             />
+        <action
+            android:id="@+id/action_mainFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
@@ -132,6 +136,12 @@
         android:id="@+id/detectMockLocationFragment"
         android:name="com.ikemura.android_kotlin_lab.mocklocation.DetectMockLocationFragment"
         android:label="DetectMockLocationFragment"
+        />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.ikemura.android_kotlin_lab.map.MapsFragment"
+        android:label="maps_fragment"
+        tools:layout="@layout/maps_fragment"
         />
 
 </navigation>
