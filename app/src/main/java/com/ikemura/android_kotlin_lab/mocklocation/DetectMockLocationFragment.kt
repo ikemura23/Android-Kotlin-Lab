@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.location.LocationServices
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.DetectMockLocationFragmentBinding
+import java.io.IOException
 
 /**
  * 疑似GPSを検出するFragment
@@ -30,6 +31,9 @@ class DetectMockLocationFragment : Fragment(R.layout.detect_mock_location_fragme
         super.onViewCreated(view, savedInstanceState)
         binding.check.setOnClickListener {
             checkMockLocation()
+        }
+        binding.checkRoot.setOnClickListener {
+            checkDeviceRoot()
         }
         // 位置情報リクエストを開始
         requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -69,5 +73,23 @@ class DetectMockLocationFragment : Fragment(R.layout.detect_mock_location_fragme
     private fun showResult(result: Boolean) {
         val resultText = if (result) "GPS偽装を検出した" else "正常なGPSです"
         binding.result.text = resultText
+    }
+
+    /**
+     * デバイスがRoot化されているかをチェックする
+     */
+    private fun checkDeviceRoot() {
+        val isRoot = try {
+            val process = Runtime.getRuntime().exec("su")
+            process.destroy()
+            true
+        } catch (e: IOException) {
+            false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+
+        binding.resultRoot.text = if (isRoot) "コイツはRoot端末のにおいがプンプンするぜ" else "非root端末である"
     }
 }

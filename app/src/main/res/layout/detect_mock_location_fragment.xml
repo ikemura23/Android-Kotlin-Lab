@@ -23,7 +23,21 @@
         android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text=""
         />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/check_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="端末がroot化されているかチェック"
+        />
+
+    <TextView
+        android:id="@+id/result_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="結果"
+        />
 </LinearLayout>
