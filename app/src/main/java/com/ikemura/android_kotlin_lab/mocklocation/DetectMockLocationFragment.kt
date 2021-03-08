@@ -58,6 +58,7 @@ class DetectMockLocationFragment : Fragment(R.layout.detect_mock_location_fragme
         // 直近の位置情報を取得を開始
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            // location.isFromMockProvider == true だと偽の位置情報と判定してよい（実験済み）
             showResult(location.isFromMockProvider)
         }
     }
