@@ -76,5 +76,13 @@
             android:layout_margin="8dp"
             android:text="Location"
             />
+
+        <Button
+            android:id="@+id/detect_mock_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Detect Mock Location"
+            />
     </LinearLayout>
 </layout>

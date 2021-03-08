@@ -37,6 +37,10 @@
             android:id="@+id/action_mainFragment_to_locationFragment"
             app:destination="@id/locationFragment"
             />
+        <action
+            android:id="@+id/action_mainFragment_to_detectMockLocationFragment"
+            app:destination="@id/detectMockLocationFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
@@ -123,6 +127,11 @@
         android:id="@+id/locationFragment"
         android:name="com.ikemura.android_kotlin_lab.permission.location.LocationFragment"
         android:label="LocationFragment"
+        />
+    <fragment
+        android:id="@+id/detectMockLocationFragment"
+        android:name="com.ikemura.android_kotlin_lab.mocklocation.DetectMockLocationFragment"
+        android:label="DetectMockLocationFragment"
         />
 
 </navigation>
