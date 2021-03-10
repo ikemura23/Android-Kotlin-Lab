@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ikemura.android_kotlin_lab"
+    >
+
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+</manifest>
