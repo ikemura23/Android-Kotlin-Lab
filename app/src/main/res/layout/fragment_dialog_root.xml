@@ -57,11 +57,19 @@
             android:layout_height="wrap_content"
             android:text="Transport Dialog"
             />
+
         <Button
             android:id="@+id/transport2_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Transport2"
+            />
+
+        <Button
+            android:id="@+id/animation_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Animation Dialog"
             />
     </LinearLayout>
 </layout>
