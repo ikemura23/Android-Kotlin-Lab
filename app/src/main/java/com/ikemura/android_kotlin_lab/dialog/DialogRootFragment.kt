@@ -11,11 +11,11 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.CalendarConstraints.DateValidator
 import com.google.android.material.datepicker.CompositeDateValidator
 import com.google.android.material.datepicker.DateValidatorPointBackward
-import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.FragmentDialogRootBinding
 import com.ikemura.android_kotlin_lab.di.ViewModelInjector.dialogRootViewModel
+import com.ikemura.android_kotlin_lab.dialog.dialogfragment.AnimationDialogFragment
 import com.ikemura.android_kotlin_lab.extention.viewBinding
 import com.ikemura.android_kotlin_lab.repository.DummyRepository
 import java.text.SimpleDateFormat
@@ -57,6 +57,9 @@ class DialogRootFragment : Fragment() {
             }
             transport2Dialog.setOnClickListener {
                 findNavController().navigate(DialogRootFragmentDirections.actionDialogRootFragmentToTransportDialogFragment2())
+            }
+            animationDialog.setOnClickListener {
+                AnimationDialogFragment().show(childFragmentManager, AnimationDialogFragment::javaClass.name)
             }
         }
     }

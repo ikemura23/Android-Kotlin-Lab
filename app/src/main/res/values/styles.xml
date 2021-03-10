@@ -12,4 +12,8 @@
     <style name="TransportDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/long_fade_in</item>
+    </style>
 </resources>
