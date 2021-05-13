@@ -12,6 +12,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ikemura.android_kotlin_lab.databinding.FragmentSpeechRecognizerBinding
 
+/**
+ * 声を音声認識で文字に出力するサンプル
+ */
 class SpeechRecognizerFragment : Fragment() {
 
     private lateinit var binding: FragmentSpeechRecognizerBinding
@@ -70,6 +73,7 @@ class SpeechRecognizerFragment : Fragment() {
                 results?.let {
                     val list = it.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     Log.d(TAG, "onResults: $list")
+                    binding.speechWord.text = list?.firstOrNull() ?: ""
                 }
             }
 
