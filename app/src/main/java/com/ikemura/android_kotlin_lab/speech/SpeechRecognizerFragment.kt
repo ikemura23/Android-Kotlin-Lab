@@ -19,10 +19,6 @@ class SpeechRecognizerFragment : Fragment() {
 
     private lateinit var binding: FragmentSpeechRecognizerBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -95,8 +91,5 @@ class SpeechRecognizerFragment : Fragment() {
 
     companion object {
         private const val TAG = "SpeechRecognizerFragmen"
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) = SpeechRecognizerFragment()
     }
 }
