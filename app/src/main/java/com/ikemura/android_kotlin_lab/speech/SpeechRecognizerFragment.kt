@@ -51,6 +51,7 @@ class SpeechRecognizerFragment : Fragment() {
 
             override fun onBeginningOfSpeech() {
                 Log.d(TAG, "onBeginningOfSpeech")
+                binding.speechWord.text = ""
             }
 
             override fun onRmsChanged(rmsdB: Float) {
