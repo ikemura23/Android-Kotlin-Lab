@@ -10,10 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ikemura.android_kotlin_lab.R
-import java.util.Locale
+import com.ikemura.android_kotlin_lab.databinding.FragmentSpeechRecognizerBinding
 
 class SpeechRecognizerFragment : Fragment() {
+
+    private lateinit var binding: FragmentSpeechRecognizerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +23,11 @@ class SpeechRecognizerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
+        binding = FragmentSpeechRecognizerBinding.inflate(inflater)
         // 音声処理
         setupSpeechRecognizer()
-        return inflater.inflate(R.layout.fragment_speech_recognizer, container, false)
+        return binding.root
     }
 
     private fun setupSpeechRecognizer() {
@@ -34,13 +36,14 @@ class SpeechRecognizerFragment : Fragment() {
         recognizer.setRecognitionListener(listener)
         val intent = createRecognizerIntent()
 
-        recognizer.startListening(intent)
+        binding.startButton.setOnClickListener { recognizer.startListening(intent) }
+        binding.endButton.setOnClickListener { recognizer.stopListening() }
     }
 
     private fun createRecognitionListener(): RecognitionListener {
         return object : RecognitionListener {
             override fun onReadyForSpeech(params: Bundle?) {
-                Log.d(TAG, "onReadyForSpeech")
+                Log.d(TAG, "onReadyForSpeech: $params")
             }
 
             override fun onBeginningOfSpeech() {
@@ -64,7 +67,10 @@ class SpeechRecognizerFragment : Fragment() {
             }
 
             override fun onResults(results: Bundle?) {
-                Log.d(TAG, "onResults")
+                results?.let {
+                    val list = it.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                    Log.d(TAG, "onResults: $list")
+                }
             }
 
             override fun onPartialResults(partialResults: Bundle?) {
@@ -78,20 +84,8 @@ class SpeechRecognizerFragment : Fragment() {
     }
 
     private fun createRecognizerIntent(): Intent {
-        return Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).also {
-            it.putExtra(RecognizerIntent.LANGUAGE_MODEL_FREE_FORM, true)
-            // 音声がなければ5秒待って閉じる : 5000
-            it.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 5000)
-            // 音声入力停止判定を3秒 : 3000
-            it.putExtra(
-                RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS,
-                3000
-            )
-            it.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 50000)
-            it.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
-            it.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.JAPAN.toString())
-            it.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
-        }
+        // https://developer.android.com/reference/android/speech/RecognizerIntent
+        return Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
     }
 
     companion object {
