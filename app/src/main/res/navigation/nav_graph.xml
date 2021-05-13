@@ -45,6 +45,10 @@
             android:id="@+id/action_mainFragment_to_mapsFragment"
             app:destination="@id/mapsFragment"
             />
+        <action
+            android:id="@+id/action_mainFragment_to_speechRecognizerFragment"
+            app:destination="@id/speechRecognizerFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/itemFragment"
@@ -142,6 +146,12 @@
         android:name="com.ikemura.android_kotlin_lab.map.MapsFragment"
         android:label="maps_fragment"
         tools:layout="@layout/maps_fragment"
+        />
+    <fragment
+        android:id="@+id/speechRecognizerFragment"
+        android:name="com.ikemura.android_kotlin_lab.speech.SpeechRecognizerFragment"
+        android:label="fragment_speech_recognizer"
+        tools:layout="@layout/fragment_speech_recognizer"
         />
 
 </navigation>

@@ -59,6 +59,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             it.detectMockLocationButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetectMockLocationFragment())
             }
+            it.speechButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToSpeechRecognizerFragment())
+            }
         }
         // ViewModelの設定
         viewModel.state.observeEvent(this, this::onNavigate)
