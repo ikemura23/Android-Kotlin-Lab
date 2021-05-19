@@ -25,7 +25,13 @@ class SpeechRecognizerFragment : Fragment() {
     ): View {
         binding = FragmentSpeechRecognizerBinding.inflate(inflater)
         // 音声処理
-        setupSpeechRecognizer()
+        if (SpeechRecognizer.isRecognitionAvailable(requireContext())) {
+            setupSpeechRecognizer()
+        } else {
+            Log.e(TAG, "音声認識が使えないデバイス")
+            binding.speechWord.text = "音声認識が使えないデバイス"
+        }
+
         return binding.root
     }
 
