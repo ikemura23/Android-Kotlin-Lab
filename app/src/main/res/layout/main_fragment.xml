@@ -30,6 +30,14 @@
             />
 
         <Button
+            android:id="@+id/location_popup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Location Popup"
+            />
+
+        <Button
             android:id="@+id/state_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

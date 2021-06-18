@@ -59,6 +59,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             it.detectMockLocationButton.setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetectMockLocationFragment())
             }
+            it.locationPopupButton.setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToLocationPopupFragment())
+            }
         }
         // ViewModelの設定
         viewModel.state.observeEvent(this, this::onNavigate)

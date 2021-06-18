@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation
-    android:id="@+id/nav_graph"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment"
     >
 
@@ -44,6 +44,10 @@
         <action
             android:id="@+id/action_mainFragment_to_mapsFragment"
             app:destination="@id/mapsFragment"
+            />
+        <action
+            android:id="@+id/action_mainFragment_to_locationPopupFragment"
+            app:destination="@id/locationPopupFragment"
             />
     </fragment>
     <fragment
@@ -132,16 +136,25 @@
         android:name="com.ikemura.android_kotlin_lab.permission.location.LocationFragment"
         android:label="LocationFragment"
         />
+
     <fragment
         android:id="@+id/detectMockLocationFragment"
         android:name="com.ikemura.android_kotlin_lab.mocklocation.DetectMockLocationFragment"
         android:label="DetectMockLocationFragment"
         />
+
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.ikemura.android_kotlin_lab.map.MapsFragment"
         android:label="maps_fragment"
         tools:layout="@layout/maps_fragment"
+        />
+
+    <fragment
+        android:id="@+id/locationPopupFragment"
+        android:name="com.ikemura.android_kotlin_lab.locationpopup.LocationPopupFragment"
+        android:label="LocationPopupFragment"
+        tools:layout="@layout/location_popup_fragment"
         />
 
 </navigation>
