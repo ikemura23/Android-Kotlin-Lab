@@ -9,6 +9,9 @@ import com.ikemura.android_kotlin_lab.databinding.LocationPopupFragmentBinding
 import com.ikemura.android_kotlin_lab.locationpopup.dialog.LocationPopupDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * 位置情報の説明dialog　-> 位置情報permission要求 の表示Fragment
+ */
 class LocationPopupFragment : Fragment() {
 
     lateinit var binding: LocationPopupFragmentBinding
