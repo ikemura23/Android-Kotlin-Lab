@@ -21,11 +21,11 @@ class LocationPopupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.locationPopupStartButton.setOnClickListener {
-            startLocationPoopup()
+            startLocationPopup()
         }
     }
 
-    private fun startLocationPoopup() {
+    private fun startLocationPopup() {
         // TODO メイン処理
     }
 }
