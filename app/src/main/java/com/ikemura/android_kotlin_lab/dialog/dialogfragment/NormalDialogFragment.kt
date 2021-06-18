@@ -24,9 +24,8 @@ class NormalDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
+        binding = NormalDialogFragmentBinding.inflate(
             inflater,
-            R.layout.normal_dialog_fragment,
             container,
             false
         )
