@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ikemura.android_kotlin_lab.databinding.LocationPopupFragmentBinding
+import com.ikemura.android_kotlin_lab.locationpopup.dialog.LocationPopupDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocationPopupFragment : Fragment() {
@@ -26,6 +27,6 @@ class LocationPopupFragment : Fragment() {
     }
 
     private fun startLocationPopup() {
-        // TODO メイン処理
+        LocationPopupDialogFragment().show(childFragmentManager, LocationPopupDialogFragment::class.java.name)
     }
 }
