@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.ikemura.android_kotlin_lab.databinding.LocationPopupFragmentBinding
+import com.ikemura.android_kotlin_lab.extention.observeEvent
 import com.ikemura.android_kotlin_lab.locationpopup.dialog.LocationPopupDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,10 +36,20 @@ class LocationPopupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startLocationPopup()
-        // binding.locationPopupStartButton.setOnClickListener {
-        //     startLocationPopup()
-        // }
+        viewModel.state.observeEvent(viewLifecycleOwner) { event ->
+            when (event) {
+                Nav.ShowFineLocationDialog -> {
+                    LocationPopupDialogFragment().show(childFragmentManager, LocationPopupDialogFragment::class.java.name)
+                }
+                Nav.RequestFineLocation -> {
+                }
+                Nav.ShowBackGroundLocationDialog -> {
+                }
+                Nav.RequestBackGroundLocation -> {
+                }
+            }
+        }
+        viewModel.startLocationPopup()
     }
 
     /**
