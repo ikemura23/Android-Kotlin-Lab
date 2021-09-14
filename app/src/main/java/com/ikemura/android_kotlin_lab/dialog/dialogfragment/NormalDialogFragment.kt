@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import com.ikemura.android_kotlin_lab.R
 import com.ikemura.android_kotlin_lab.databinding.NormalDialogFragmentBinding
 
 /**
@@ -22,11 +20,10 @@ class NormalDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(
+        binding = NormalDialogFragmentBinding.inflate(
             inflater,
-            R.layout.normal_dialog_fragment,
             container,
             false
         )
